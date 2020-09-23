@@ -60,7 +60,7 @@ export default function Header() {
           <MenuItem component={RouterLink} to="/user">
             {user.firstName}
           </MenuItem>
-          <MenuItem component={Link} underline="none" href="/logout">
+          <MenuItem component={Link} underline="none" href="/api/logout">
             Log Out
           </MenuItem>
         </div>
