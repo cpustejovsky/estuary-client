@@ -2,6 +2,8 @@ import "./user";
 import "./freeWrites";
 import "./notes";
 import "./projects";
+import "./auth"
+export { signUp, login} from "./auth"
 export { fetchUser, updateUser } from "./user";
 export { fetchFreeWrites, createFreeWrite } from "./freeWrites";
 export {
