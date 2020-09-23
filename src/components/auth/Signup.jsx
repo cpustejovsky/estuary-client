@@ -1,14 +1,14 @@
 import React from "react";
 import { Formik } from "formik";
 import { connect, useSelector } from "react-redux";
-import { updateUser } from "../../actions";
+import { signUp } from "../../actions";
 import { Button, CardActions, TextField } from "@material-ui/core/";
 
 const SignUp = (props) => {
   const submitValues = (values) => {
-    // let history = props.history;
+    let history = props.history;
     console.log(values);
-    // props.updateUser(values, history);
+    props.signUp(values, history)
   };
 
   let signupData = {
@@ -100,4 +100,4 @@ const SignUp = (props) => {
   );
 };
 
-export default connect(null, { updateUser })(SignUp);
+export default connect(null, { signUp })(SignUp);
