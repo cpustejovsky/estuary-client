@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { fetchUser } from "../actions";
 import history from "../history";
 import Header from "./partials/Header";
-import Auth from "./Login";
+import Login from "./auth/Login";
+import Signup from "./auth/Signup";
 import About from "./about/About";
 import Landing from "./Landing";
 import UserShow from "./user/UserShow";
@@ -32,7 +33,8 @@ function App({ fetchUser, user }) {
           <Route path="/test" exact component={Test} />
           <Route path="/timer" exact component={Timer} />
           <Route path="/about" exact component={About} />
-          <Route path="/login" exact component={Auth} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={Signup} />
           <Route path="/free-writes" exact component={FreeWritesShow} />
           <Route path="/free-writes/new" exact component={FreeWritesNew} />
           <Route path="/notes/organize" exact component={NotesOrganize} />
