@@ -69,14 +69,12 @@ export default function Header() {
       return (
         <div className={classes.menuItems}>
           <MenuItem
-            className={classes.menuItems}
             component={RouterLink}
             to="/login"
           >
             Log in
           </MenuItem>
           <MenuItem
-            className={classes.menuItems}
             component={RouterLink}
             to="/signup"
           >
