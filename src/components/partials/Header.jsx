@@ -78,7 +78,7 @@ export default function Header() {
           <MenuItem
             className={classes.menuItems}
             component={RouterLink}
-            to="/login"
+            to="/signup"
           >
             Sign Up
           </MenuItem>

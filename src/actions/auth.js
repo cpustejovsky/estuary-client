@@ -5,7 +5,7 @@ import {
 } from "./types";
 
 export const signUp = (values, history) => async (dispatch) => {
-  const response = await axios.post("/signup");
+  const response = await axios.post("/api/signup", values);
   history.push("/");
   dispatch({
     type: SIGN_UP,
