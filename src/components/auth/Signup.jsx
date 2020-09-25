@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { signUp } from "../../actions";
 import { Button, CardActions, TextField } from "@material-ui/core/";
 
 const SignUp = (props) => {
   const submitValues = (values) => {
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let history = props.history;
-    console.log(values);
-    props.signUp(values, history)
+    if (!regex.test(values.emailAddress)) {
+      setValidEmail(false);
+    } else {
+      props.signUp(values, history);
+    }
   };
 
   let signupData = {
@@ -17,6 +21,8 @@ const SignUp = (props) => {
     emailAddress: "",
     password: "",
   };
+
+  const [validEmail, setValidEmail] = useState(true);
 
   return (
     <div className="center">
@@ -35,6 +41,7 @@ const SignUp = (props) => {
           <form onSubmit={handleSubmit}>
             <div>
               <TextField
+                required
                 name="firstName"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -46,6 +53,7 @@ const SignUp = (props) => {
             <br />
             <div>
               <TextField
+                required
                 name="lastName"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -57,6 +65,9 @@ const SignUp = (props) => {
             <br />
             <div>
               <TextField
+                required
+                error={validEmail ? false : true}
+                helperText="Invalid Email Address"
                 name="emailAddress"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -69,6 +80,7 @@ const SignUp = (props) => {
             <br />
             <div>
               <TextField
+                required
                 name="password"
                 onChange={handleChange}
                 onBlur={handleBlur}
