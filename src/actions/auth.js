@@ -13,7 +13,7 @@ export const signUp = (values, history) => async (dispatch) => {
   });
 };
 export const login = (values, history) => async (dispatch) => {
-  const response = await axios.patch("/api/user", values);
+  const response = await axios.post("/api/login", values);
   history.push("/");
   dispatch({
     type: LOG_IN,

@@ -1,14 +1,14 @@
 import React from "react";
 import { Formik } from "formik";
 import { connect, useSelector } from "react-redux";
-import { updateUser } from "../../actions";
+import { login } from "../../actions";
 import { Button, CardActions, TextField } from "@material-ui/core/";
 
 const Login = (props) => {
   const submitValues = (values) => {
-    // let history = props.history;
+    let history = props.history;
     console.log(values);
-    // props.updateUser(values, history);
+    props.login(values, history);
   };
 
   const user = useSelector((state) => state.user);
@@ -80,4 +80,4 @@ const Login = (props) => {
   );
 };
 
-export default connect(null, { updateUser })(Login);
+export default connect(null, { login })(Login);
