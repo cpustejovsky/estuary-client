@@ -23,7 +23,6 @@ import {
   Switch,
   FormControlLabel,
   Button,
-  ButtonGroup,
 } from "@material-ui/core";
 
 function NotesOrganize({

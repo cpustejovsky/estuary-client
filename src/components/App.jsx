@@ -1,4 +1,4 @@
-import React, { useEffect, useSelector } from "react";
+import React, { useEffect } from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUser } from "../actions";

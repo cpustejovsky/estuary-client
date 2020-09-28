@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik } from "formik";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { login } from "../../actions";
 import { Button, CardActions, TextField } from "@material-ui/core/";
 
@@ -10,8 +10,6 @@ const Login = (props) => {
     console.log(values);
     props.login(values, history);
   };
-
-  const user = useSelector((state) => state.user);
 
   let loginData = {
     firstName: "",

@@ -19,7 +19,7 @@ function Calendar({
   toggle
 }) {
   const submitValues = async (values) => {
-    const response = await axios.post("/api/calendar", values);
+    await axios.post("/api/calendar", values);
     deleteNote(note.id);
     toggle.Calendar();
     toggle.Actionable();
