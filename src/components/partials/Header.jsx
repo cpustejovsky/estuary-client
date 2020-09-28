@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
         color: "white",
       },
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
     },
   },
