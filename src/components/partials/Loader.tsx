@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Loader() {
+export default function Loader(): JSX.Element {
   return (
     <div className="margin-top preloader-wrapper big active ">
       <div className="spinner-layer spinner-blue">

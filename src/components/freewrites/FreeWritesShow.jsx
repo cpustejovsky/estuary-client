@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 import { fetchFreeWrites } from "../../actions";
-import Loader from "../partials/Loader";
+import Loader from "../partials/Loader.tsx";
 import { Fab, Card, CardContent, Typography } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import _ from "lodash";

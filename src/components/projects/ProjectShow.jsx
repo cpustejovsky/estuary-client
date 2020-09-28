@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect, useSelector } from "react-redux";
 import Project from "./Project";
-import Loader from "../partials/Loader";
+import Loader from "../partials/Loader.tsx";
 import { fetchProject, fetchProjectNotes } from "../../actions";
 import { Link as RouterLink } from "react-router-dom";
 import { Button } from "@material-ui/core";

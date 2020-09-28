@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect, useSelector } from "react-redux";
 import _ from "lodash";
 import { fetchNotesByCategory } from "../../../actions";
-import Loader from "../../partials/Loader";
+import Loader from "../../partials/Loader.tsx";
 import Note from "../Note";
 import NotesNew from "../NoteNew";
 import renderSubHeader from "./renderSubheader";

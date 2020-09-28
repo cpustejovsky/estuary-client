@@ -8,7 +8,7 @@ import {
   fetchProjects,
 } from "../../../../actions";
 import { mapInTrayArray, renderNote } from "./flowHelpers";
-import Loader from "../../../partials/Loader";
+import Loader from "../../../partials/Loader.tsx";
 import Actionable from "../Actionable";
 import NotActionable from "../NotActionable";
 import TwoMinutes from "../TwoMinutes";
