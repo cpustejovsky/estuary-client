@@ -24,9 +24,10 @@ function App({ fetchUser }) {
   const user = useSelector((state) => state.user);
   const auth = useSelector((state) => state.auth);
   const getUserId = (user) => user ? user.ID : null
+  let id = getUserId()
   useEffect(() => {
     fetchUser();
-  }, [getUserId(), auth]);
+  }, [id, auth, fetchUser]);
   return (
     <Router history={history}>
       <Header user={user} history={history}/>
