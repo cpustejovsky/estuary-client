@@ -3,7 +3,7 @@ import {
   FETCH_FREEWRITES,
   CREATE_FREEWRITE,
 
-} from "./types";
+} from "./types.ts";
 
 export const fetchFreeWrites = () => async (dispatch) => {
   const response = await axios.get("/api/free-writes");

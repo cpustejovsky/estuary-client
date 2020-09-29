@@ -2,7 +2,7 @@ import axios from "axios";
 import {
   FETCH_USER,
   UPDATE_USER,
-} from "./types";
+} from "./types.ts";
 
 export const fetchUser = () => async (dispatch) => {
   const response = await axios.get("/api/user");

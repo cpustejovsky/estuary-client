@@ -5,7 +5,7 @@ import {
   CREATE_PROJECT,
   UPDATE_PROJECT,
   DELETE_PROJECT,
-} from "./types";
+} from "./types.ts";
 
 export const fetchProjects = () => async (dispatch) => {
   const response = await axios.get("/api/projects");

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOG_IN, SIGN_UP } from "./types";
+import { LOG_IN, SIGN_UP } from "./types.ts";
 
 const getToken = async () => {
   const response = await axios.get("/api/token");

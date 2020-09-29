@@ -4,7 +4,7 @@ import {
   DELETE_NOTE,
   UPDATE_NOTE,
   FETCH_NOTES_CATEGORY,
-} from "../actions/types";
+} from "../actions/types.ts";
 import _ from "lodash";
 export default function (state = {}, action) {
   switch (action.type) {

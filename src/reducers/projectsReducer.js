@@ -4,7 +4,7 @@ import {
   DELETE_PROJECT,
   UPDATE_PROJECT,
   FETCH_COMPLETED_PROJECTS
-} from "../actions/types";
+} from "../actions/types.ts";
 import _ from "lodash";
 export default function (state = {}, action) {
   switch (action.type) {

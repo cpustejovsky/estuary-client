@@ -1,4 +1,4 @@
-import { UPDATE_USER, FETCH_USER } from "../actions/types";
+import { UPDATE_USER, FETCH_USER } from "../actions/types.ts";
 
 export default function (state = null, action) {
   switch (action.type) {

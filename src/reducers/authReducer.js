@@ -1,4 +1,4 @@
-import { SIGN_UP, LOG_IN } from "../actions/types";
+import { SIGN_UP, LOG_IN } from "../actions/types.ts";
 
 export default function (state = null, action) {
   switch (action.type) {

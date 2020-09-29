@@ -5,7 +5,7 @@ import {
   CREATE_NOTE,
   DELETE_NOTE,
   UPDATE_NOTE,
-} from "./types";
+} from "./types.ts";
 
 export const fetchNotes = () => async (dispatch) => {
   const response = await axios.get("/api/notes");

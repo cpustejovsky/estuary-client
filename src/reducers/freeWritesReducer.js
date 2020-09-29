@@ -1,4 +1,4 @@
-import { CREATE_FREEWRITE, FETCH_FREEWRITES } from "../actions/types";
+import { CREATE_FREEWRITE, FETCH_FREEWRITES } from "../actions/types.ts";
 import _ from "lodash";
 
 export default function (state = {}, action) {
