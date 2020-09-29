@@ -58,13 +58,7 @@ const UserEdit = (props) => {
   };
 
   const user = useSelector((state) => state.user);
-  const updateDefault = (key) => {
-    if (user) {
-      console.log(key);
-      console.log(user[key]);
-      return user[key];
-    }
-  };
+  const updateDefault = (key) => (user ? user[key] : null);
   const [emailUpdateChecked, setEmailUpdateChecked] = React.useState(
     updateDefault("EmailUpdates")
   );

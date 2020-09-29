@@ -53,7 +53,6 @@ export default function Header() {
 
   const renderAuth = () => {
     if (user) {
-      console.log(user);
       return (
         //TODO: add breakpoints and mediaqueries to change properties based on mobile or desktop
         <div className={classes.menuItems}>
