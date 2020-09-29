@@ -1,8 +1,7 @@
 import axios from "axios";
-import {
-  FETCH_USER,
-  UPDATE_USER,
-} from "./types.ts";
+import { getInstance } from "./index";
+
+import { FETCH_USER, UPDATE_USER } from "./types.ts";
 
 export const fetchUser = () => async (dispatch) => {
   const response = await axios.get("/api/user");
@@ -12,7 +11,10 @@ export const fetchUser = () => async (dispatch) => {
   });
 };
 export const updateUser = (values, history) => async (dispatch) => {
-  const response = await axios.patch("/api/user", values);
+  console.log(values)
+  const instance = await getInstance();
+  const response = await instance.patch("/user", values);
+  console.log(response.data)
   history.push("/user");
   dispatch({
     type: UPDATE_USER,

@@ -1,14 +1,6 @@
-import axios from "axios";
+import { getInstance} from "./index"
 import { LOG_IN, SIGN_UP } from "./types.ts";
 
-const getInstance = async () => {
-  const response = await axios.get("/api/token");
-  const instance = axios.create({
-    baseURL: "/api",
-    headers: { "X-CSRF-Token": response.headers["x-csrf-token"] },
-  });
-  return instance;
-};
 
 export const login = (values, history) => async (dispatch) => {
   let instance = await getInstance();
