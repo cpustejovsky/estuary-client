@@ -2,7 +2,7 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
-export default function Landing() {
+export default function Landing(): JSX.Element {
   return (
     <div className="site">
       <h2>Estuary</h2>

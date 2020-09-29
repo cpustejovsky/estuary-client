@@ -1,7 +1,14 @@
 import React from "react";
-import axios from "axios";
+import axios, { AxiosStatic } from "axios";
 import { connect } from "react-redux";
-window.axios = axios;
+
+interface AxiosWindow extends Window {
+  axios: AxiosStatic
+}
+
+const axiosWindow = window as any as AxiosWindow
+
+axiosWindow.axios = axios
 
 function Test() {
   return (
