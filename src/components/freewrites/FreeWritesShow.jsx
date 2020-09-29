@@ -13,7 +13,7 @@ function FreeWriteShow({ fetchFreeWrites, history }) {
   const freeWrites = useSelector((state) => Object.values(state.freeWrites));
   useEffect(() => {
     fetchFreeWrites();
-  }, []);
+  }, [fetchFreeWrites]);
   const renderFreeWrites = () => {
     if (!_.isEmpty(freeWrites)) {
       return freeWrites.map(({ content, _id, title }) => {

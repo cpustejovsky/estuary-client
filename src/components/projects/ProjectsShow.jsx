@@ -30,7 +30,7 @@ function ProjectsShow({
     } else {
       fetchProjects();
     }
-  }, [match.path, done]);
+  }, [fetchCompleteProjects, fetchProjects, match.path, done]);
   const renderProjects = () => {
     if (!_.isEmpty(projects)) {
       return projects

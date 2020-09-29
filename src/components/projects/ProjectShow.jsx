@@ -11,7 +11,7 @@ function ProjectShow({ fetchProject, fetchProjectNotes, match, history }) {
   useEffect(() => {
     fetchProject(match.params.id);
     fetchProjectNotes(match.params.id);
-  }, []);
+  }, [fetchProject, fetchProjectNotes, match.params.id]);
   if (project) {
     return (
       <div>

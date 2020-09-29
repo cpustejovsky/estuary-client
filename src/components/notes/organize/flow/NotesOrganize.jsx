@@ -38,7 +38,7 @@ function NotesOrganize({
   useEffect(() => {
     fetchNotesByCategory("in-tray");
     fetchProjects();
-  }, []);
+  }, [fetchNotesByCategory, fetchProjects]);
 
   const inTrayArray = mapInTrayArray(notes, history);
   let note =
