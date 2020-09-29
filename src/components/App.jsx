@@ -20,7 +20,7 @@ import ProjectsShow from "./projects/ProjectsShow";
 import ProjectNew from "./projects/ProjectNew";
 import Timer from "./notes/organize/Timer";
 
-function App({ fetchUser, user }) {
+function App({ fetchUser }) {
   useEffect(() => {
     fetchUser();
   }, []);

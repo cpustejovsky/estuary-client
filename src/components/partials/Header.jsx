@@ -58,7 +58,7 @@ export default function Header() {
         //TODO: add breakpoints and mediaqueries to change properties based on mobile or desktop
         <div className={classes.menuItems}>
           <MenuItem component={RouterLink} to="/user">
-            {user.firstName}
+            {user.FirstName}
           </MenuItem>
           <MenuItem component={Link} underline="none" href="/api/logout">
             Log Out
