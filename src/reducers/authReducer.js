@@ -1,6 +1,6 @@
-import { SIGN_UP, LOG_IN } from "../actions/types.ts";
+import { SIGN_UP, LOG_IN, LOG_OUT } from "../actions/types.ts";
 
-export default function (state = null, action) {
+export default function (state = false, action) {
   switch (action.type) {
     case SIGN_UP:
       return action.payload || false;

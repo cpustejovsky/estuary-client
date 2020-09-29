@@ -7,12 +7,12 @@ const getInstance = async () => {
     baseURL: "/api",
     headers: { "X-CSRF-Token": response.headers["x-csrf-token"] },
   });
-  return instance
+  return instance;
 };
 
 export const login = (values, history) => async (dispatch) => {
   let instance = await getInstance();
-  const response = instance.post("/login", values)  
+  const response = await instance.post("/login", values);
   history.push("/");
   dispatch({
     type: LOG_IN,

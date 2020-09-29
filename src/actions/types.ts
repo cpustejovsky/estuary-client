@@ -1,6 +1,6 @@
 //AUTH
-export const LOG_IN: string = "LOG_IN";
 export const SIGN_UP: string = "SIGN_UP";
+export const LOG_IN: string = "LOG_IN";
 //USER
 export const FETCH_USER: string = "FETCH_USER";
 export const UPDATE_USER: string = "UPDATE_USER";

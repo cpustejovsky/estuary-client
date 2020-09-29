@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Router, Route, Switch } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { fetchUser } from "../actions";
 import history from "../history";
 import Header from "./partials/Header";
@@ -21,12 +21,15 @@ import ProjectNew from "./projects/ProjectNew";
 import Timer from "./notes/organize/Timer";
 
 function App({ fetchUser }) {
+  const user = useSelector((state) => state.user);
+  const auth = useSelector((state) => state.auth);
+  const getUserId = (user) => user ? user.ID : null
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, [getUserId(), auth]);
   return (
     <Router history={history}>
-      <Header />
+      <Header user={user} history={history}/>
       <div className="site">
         <Switch>
           <Route path="/" exact component={Landing} />
