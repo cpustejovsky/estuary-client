@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
-import axios from "axios";
 import {
   Button,
   Card,
@@ -13,6 +12,7 @@ import {
 function User() {
   const auth = useSelector((state) => state.auth);
   const user = useSelector((state) => state.user);
+  //TODO: Add Note Statistics In
   // const [stats, setStats] = useState({});
   // const fetchNotestatistics = async () => {
   //   let response = await axios.get("/api/notes/stats");
