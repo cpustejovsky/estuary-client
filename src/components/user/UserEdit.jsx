@@ -21,7 +21,7 @@ const UserEdit = (props) => {
   const user = useSelector((state) => state.user);
   const emailUpdateDefault = () => {
     if (user) {
-      return user.emailUpdates ? true : false;
+      return user.EmailUpdates ? true : false;
     }
   };
   const [checked, setChecked] = React.useState(emailUpdateDefault());
@@ -31,10 +31,10 @@ const UserEdit = (props) => {
   let updatedData;
   if (user) {
     updatedData = {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      emailUpdates: user.emailUpdates,
-      advancedView: user.advancedView
+      FirstName: user.FirstName,
+      LastName: user.LastName,
+      EmailUpdates: user.EmailUpdates,
+      AdvancedView: user.AdvancedView
     };
   }
 
@@ -64,10 +64,10 @@ const UserEdit = (props) => {
               <form onSubmit={handleSubmit}>
                 <div>
                   <TextField
-                    name="firstName"
+                    name="FirstName"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.firstName}
+                    value={values.FirstName}
                     fullWidth
                     label="First Name"
                     variant="outlined"
@@ -76,10 +76,10 @@ const UserEdit = (props) => {
                 <br />
                 <div>
                   <TextField
-                    name="lastName"
+                    name="LastName"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.lastName}
+                    value={values.LastName}
                     fullWidth
                     label="Last Name"
                     variant="outlined"
@@ -90,14 +90,14 @@ const UserEdit = (props) => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={values.emailUpdates ? checked: null}
+                        checked={values.EmailUpdates ? checked: null}
                         onChange={handleChange}
                         onClick={handleClick}
                         color="primary"
                         id="email-updates"
-                        name="emailUpdates"
+                        name="EmailUpdates"
                         onBlur={handleBlur}
-                        value={values.emailUpdates}
+                        value={values.EmailUpdates}
                       />
                     }
                     label="Daily Email Updates"
@@ -108,14 +108,14 @@ const UserEdit = (props) => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={values.advancedView ? checked: null}
+                        checked={values.AdvancedView ? checked: null}
                         onChange={handleChange}
                         onClick={handleClick}
                         color="primary"
                         id="advanced-view"
-                        name="advancedView"
+                        name="AdvancedView"
                         onBlur={handleBlur}
-                        value={values.advancedView}
+                        value={values.AdvancedView}
                       />
                     }
                     label="Advanced Organization View"

@@ -13,22 +13,22 @@ import {
 function User() {
   const auth = useSelector((state) => state.auth);
   const user = useSelector((state) => state.user);
-  const [stats, setStats] = useState({});
-  const fetchNotestatistics = async () => {
-    let response = await axios.get("/api/notes/stats");
-    setStats(response.data);
-  };
-  useEffect(() => {
-    fetchNotestatistics();
-  }, []);
-  const renderStatistics = (stats) =>
-    Object.keys(stats).map((key) => (
-      <li>
-        {key.toUpperCase()}: {stats[key]}
-      </li>
-    ));
+  // const [stats, setStats] = useState({});
+  // const fetchNotestatistics = async () => {
+  //   let response = await axios.get("/api/notes/stats");
+  //   setStats(response.data);
+  // };
+  // useEffect(() => {
+  //   fetchNotestatistics();
+  // }, []);
+  // const renderStatistics = (stats) =>
+  //   Object.keys(stats).map((key) => (
+  //     <li>
+  //       {key.toUpperCase()}: {stats[key]}
+  //     </li>
+  //   ));
 
-  renderStatistics(stats);
+  // renderStatistics(stats);
   if (!auth && !user) {
     return "Loading";
   } else if (user) {
