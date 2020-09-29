@@ -19,14 +19,18 @@ const UserEdit = (props) => {
   };
 
   const user = useSelector((state) => state.user);
-  const emailUpdateDefault = () => {
+  const updateDefault = (key) => {
     if (user) {
-      return user.EmailUpdates ? true : false;
+      console.log(key)
+      console.log(user[key])
+      return user[key];
     }
   };
-  const [checked, setChecked] = React.useState(emailUpdateDefault());
+  const [emailUpdateChecked, setEmailUpdateChecked] = React.useState(updateDefault("EmailUpdates"));
+  const [advancedViewChecked, setAdvancedViewChecked] = React.useState(updateDefault("AdvancedView"));
   const handleClick = (event) => {
-    setChecked(event.target.checked);
+    setEmailUpdateChecked(!event.target.emailUpdateChecked);
+    setAdvancedViewChecked(!event.target.advancedViewChecked);
   };
   let updatedData;
   if (user) {
@@ -90,7 +94,7 @@ const UserEdit = (props) => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={values.EmailUpdates ? checked: null}
+                        checked={values.EmailUpdates ? emailUpdateChecked: null}
                         onChange={handleChange}
                         onClick={handleClick}
                         color="primary"
@@ -108,7 +112,7 @@ const UserEdit = (props) => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={values.AdvancedView ? checked: null}
+                        checked={values.AdvancedView ? advancedViewChecked: null}
                         onChange={handleChange}
                         onClick={handleClick}
                         color="primary"
