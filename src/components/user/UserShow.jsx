@@ -37,21 +37,25 @@ function User() {
         <Card raised>
           <CardContent className="card-content">
             <Typography gutterBottom variant="h4">
-              {user.displayName || user.firstName} {user.lastName}
+              {user.displayName || user.FirstName} {user.LastName}
             </Typography>
             <p>
               <strong>Email Address: </strong>
-              {user.email}
+              {user.EmailAddress}
             </p>
             <p>
               <strong>Daily Email Updates: </strong>
-              {user.emailUpdates === true ? "On" : "Off"}
+              {user.EmailUpdates === true ? "On" : "Off"}
+            </p>
+            <p>
+              <strong>Advanced View: </strong>
+              {user.AdvancedView === true ? "On" : "Off"}
             </p>
             <hr />
-            <Typography gutterBottom variant="h5">
+            {/* <Typography gutterBottom variant="h5">
               Note Statistics
             </Typography>
-            <ul>{renderStatistics(stats)}</ul>
+            <ul>{renderStatistics(stats)}</ul> */}
           </CardContent>
           <CardActions className="card-action">
             <Button component={RouterLink} to="/user/edit">
