@@ -2,11 +2,11 @@ import "./user";
 import "./freeWrites";
 import "./notes";
 import "./projects";
-import "./auth"
-import axios from "axios"
+import "./auth";
+import axios from "axios";
 
-export { signUp, login} from "./auth"
-export { fetchUser, updateUser } from "./user";
+export { signUp, login } from "./auth";
+export { fetchUser, updateUser, deleteUser } from "./user";
 export { fetchFreeWrites, createFreeWrite } from "./freeWrites";
 export {
   fetchNotes,
@@ -25,7 +25,7 @@ export {
   createProject,
   updateProject,
   deleteProject,
-  completeProject
+  completeProject,
 } from "./projects";
 
 export const getInstance = async () => {

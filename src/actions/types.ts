@@ -4,6 +4,7 @@ export const LOG_IN: string = "LOG_IN";
 //USER
 export const FETCH_USER: string = "FETCH_USER";
 export const UPDATE_USER: string = "UPDATE_USER";
+export const DELETE_USER: string = "DELETE_USER";
 //FREE WRITES
 export const FETCH_FREEWRITES: string = "FETCH_FREEWRITES";
 export const CREATE_FREEWRITE: string = "CREATE_FREEWRITE";

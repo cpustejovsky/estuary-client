@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import { connect, useSelector } from "react-redux";
-import { updateUser } from "../../actions";
+import { updateUser, deleteUser } from "../../actions";
+import { green, red, grey } from "@material-ui/core/colors";
 import {
   Button,
   Card,
@@ -13,6 +14,44 @@ import {
 } from "@material-ui/core/";
 
 const UserEdit = (props) => {
+  const [deleteShow, setDeleteShow] = useState(false);
+  const toggleDelete = () => setDeleteShow(!deleteShow);
+
+  const renderDelete = () => {
+    if (deleteShow) {
+      return (
+        <div style={{ justifyContent: "center" }}>
+          <CardActions>
+            <Button disabled style={{ color: grey[500] }}>
+              Are you sure?
+            </Button>
+          </CardActions>
+          <CardActions>
+            <Button
+              style={{ color: green[500] }}
+              onClick={() => {
+                props.deleteUser(props.history);
+                toggleDelete();
+              }}
+              className="click"
+            >
+              Yes
+            </Button>
+            <Button
+              style={{ color: red[500] }}
+              onClick={() => props.toggleDelete()}
+              className="click"
+            >
+              No
+            </Button>
+          </CardActions>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
+
   const submitValues = (values) => {
     let history = props.history;
     props.updateUser(values, history);
@@ -21,13 +60,17 @@ const UserEdit = (props) => {
   const user = useSelector((state) => state.user);
   const updateDefault = (key) => {
     if (user) {
-      console.log(key)
-      console.log(user[key])
+      console.log(key);
+      console.log(user[key]);
       return user[key];
     }
   };
-  const [emailUpdateChecked, setEmailUpdateChecked] = React.useState(updateDefault("EmailUpdates"));
-  const [advancedViewChecked, setAdvancedViewChecked] = React.useState(updateDefault("AdvancedView"));
+  const [emailUpdateChecked, setEmailUpdateChecked] = React.useState(
+    updateDefault("EmailUpdates")
+  );
+  const [advancedViewChecked, setAdvancedViewChecked] = React.useState(
+    updateDefault("AdvancedView")
+  );
   const handleClick = (event) => {
     setEmailUpdateChecked(!event.target.emailUpdateChecked);
     setAdvancedViewChecked(!event.target.advancedViewChecked);
@@ -38,13 +81,13 @@ const UserEdit = (props) => {
       FirstName: user.FirstName,
       LastName: user.LastName,
       EmailUpdates: user.EmailUpdates,
-      AdvancedView: user.AdvancedView
+      AdvancedView: user.AdvancedView,
     };
   }
 
   if (user) {
     return (
-      <div >
+      <div>
         <Card raised style={{ padding: "20px", minWidth: "33%" }}>
           <Typography align="center" gutterBottom variant="h4" component="h2">
             Update User Profile
@@ -94,7 +137,9 @@ const UserEdit = (props) => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={values.EmailUpdates ? emailUpdateChecked: null}
+                        checked={
+                          values.EmailUpdates ? emailUpdateChecked : null
+                        }
                         onChange={handleChange}
                         onClick={handleClick}
                         color="primary"
@@ -107,12 +152,14 @@ const UserEdit = (props) => {
                     label="Daily Email Updates"
                   />
                 </div>
-                <br/>
+                <br />
                 <div>
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={values.AdvancedView ? advancedViewChecked: null}
+                        checked={
+                          values.AdvancedView ? advancedViewChecked : null
+                        }
                         onChange={handleChange}
                         onClick={handleClick}
                         color="primary"
@@ -127,7 +174,7 @@ const UserEdit = (props) => {
                 </div>
                 <CardActions
                   className="margin-top"
-                  style={{ justifyContent: "center" }}
+                  style={{ justifyContent: "space-between" }}
                 >
                   <Button
                     type="submit"
@@ -138,7 +185,16 @@ const UserEdit = (props) => {
                   >
                     Save
                   </Button>
+                  <Button
+                    onClick={() => toggleDelete()}
+                    size="large"
+                    variant="contained"
+                    color="secondary"
+                  >
+                    Delete
+                  </Button>
                 </CardActions>
+                {renderDelete()}
               </form>
             )}
           </Formik>
@@ -150,4 +206,4 @@ const UserEdit = (props) => {
   }
 };
 
-export default connect(null, { updateUser })(UserEdit);
+export default connect(null, { updateUser, deleteUser })(UserEdit);
