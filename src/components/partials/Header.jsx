@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   menuItems: {
+    width: "100%",
     display: "flex",
     [theme.breakpoints.up("md")]: {
       color: "white",
@@ -55,7 +56,7 @@ export default function Header() {
     if (user) {
       return (
         //TODO: add breakpoints and mediaqueries to change properties based on mobile or desktop
-        <div className={classes.menuItems}>
+        <div className={classes.menuItems} style={{width: "100%", justifyContent: "flex-end"}}>
           <MenuItem component={RouterLink} to="/user">
             {user.FirstName}
           </MenuItem>
@@ -67,16 +68,10 @@ export default function Header() {
     } else {
       return (
         <div className={classes.menuItems}>
-          <MenuItem
-            component={RouterLink}
-            to="/login"
-          >
+          <MenuItem component={RouterLink} to="/login">
             Log in
           </MenuItem>
-          <MenuItem
-            component={RouterLink}
-            to="/signup"
-          >
+          <MenuItem component={RouterLink} to="/signup">
             Sign Up
           </MenuItem>
         </div>
@@ -85,36 +80,34 @@ export default function Header() {
   };
   const renderMenu = (mobile = false) => {
     return (
-      <>
-        <div className={classes.menuItems}>
-          <MenuItem component={RouterLink} to="/about" onClick={handleClose}>
-            About
-          </MenuItem>
-          <MenuItem
-            component={RouterLink}
-            to="/free-writes"
-            onClick={handleClose}
-          >
-            Free Writes
-          </MenuItem>
-          <MenuItem
-            component={RouterLink}
-            to="/notes/in-tray"
-            onClick={handleClose}
-          >
-            Notes
-          </MenuItem>
-          <MenuItem
-            component={RouterLink}
-            to="/projects/list"
-            onClick={handleClose}
-          >
-            Projects
-          </MenuItem>
-          {mobile ? <hr /> : null}
-        </div>
+      <div className={classes.menuItems}>
+        <MenuItem component={RouterLink} to="/about" onClick={handleClose}>
+          About
+        </MenuItem>
+        <MenuItem
+          component={RouterLink}
+          to="/free-writes"
+          onClick={handleClose}
+        >
+          Free Writes
+        </MenuItem>
+        <MenuItem
+          component={RouterLink}
+          to="/notes/in-tray"
+          onClick={handleClose}
+        >
+          Notes
+        </MenuItem>
+        <MenuItem
+          component={RouterLink}
+          to="/projects/list"
+          onClick={handleClose}
+        >
+          Projects
+        </MenuItem>
+        {mobile ? <hr style={{width: "100%"}}/> : null}
         {renderAuth()}
-      </>
+      </div>
     );
   };
   return (
