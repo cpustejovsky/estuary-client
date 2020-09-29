@@ -7,13 +7,10 @@ import { Button, CardActions, TextField } from "@material-ui/core/";
 const Login = (props) => {
   const submitValues = (values) => {
     let history = props.history;
-    console.log(values);
     props.login(values, history);
   };
 
   let loginData = {
-    firstName: "",
-    lastName: "",
     emailAddress: "",
     password: "",
   };
@@ -32,7 +29,7 @@ const Login = (props) => {
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, isSubmitting }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} noValidate>
             <div>
               <TextField
                 name="emailAddress"
