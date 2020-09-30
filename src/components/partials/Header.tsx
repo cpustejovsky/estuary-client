@@ -46,11 +46,11 @@ export default function Header(props: Props) {
   let loc = useLocation().pathname;
   let notesPage = loc.includes("notes") && !loc.includes("organize");
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState<null | EventTarget>(null);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-  const handleClick = (event: MouseEvent) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
-  };
+  };;
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -142,7 +142,7 @@ export default function Header(props: Props) {
             color="inherit"
             aria-label="menu"
           >
-            <IconButton onClick={(event) => { handleClick(event) }} >
+            <IconButton onClick={handleClick} >
               <MenuIcon aria-haspopup="true" />
             </IconButton>
             <Menu
@@ -155,7 +155,7 @@ export default function Header(props: Props) {
             </Menu>
           </IconButton>
         </Hidden>
-        <Hidden smDown className={classes.menuContainer}>
+        <Hidden smDown>
           <div className={classes.menuContainer}>{renderMenu()}</div>
         </Hidden>
       </Toolbar>
