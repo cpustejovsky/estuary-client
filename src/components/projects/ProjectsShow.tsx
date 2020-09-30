@@ -12,7 +12,7 @@ import {
   Fab,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import { User, AppState } from "../../models/"
+import { AppState } from "../../models/"
 
 const mapState = (state: AppState) => ({
   auth: state.auth,
@@ -34,13 +34,8 @@ type Props = PropsFromRedux & {
   match: any,
 }
 
-
-
 const ProjectsShow = (props: Props): JSX.Element => {
   const {done, match, auth, user, projects, fetchProjects, fetchCompleteProjects } = props;
-  // const auth = useSelector((state: AppState) => state.auth);
-  // const user: User = useSelector((state: AppState) => state.user);
-  // const projects = useSelector((state: AppState) => Object.values(state.projects));
   useEffect(() => {
     if (done) {
       fetchCompleteProjects();

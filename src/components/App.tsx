@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Router, Route, Switch } from "react-router-dom";
-import { connect, DefaultRootState, useSelector } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { fetchUser } from "../actions";
 import history from "../history";
 import Header from "./partials/Header";
@@ -20,20 +20,27 @@ import ProjectsShow from "./projects/ProjectsShow";
 import ProjectNew from "./projects/ProjectNew";
 import Timer from "./notes/organize/Timer";
 import { User, AppState } from "../models/."
-type Props = {
-  fetchUser(): (dispatch: any) => Promise<void>
+
+const mapState = (state: AppState) => ({
+  auth: state.auth,
+  user: state.user,
+})
+
+const mapDispatch = {
+  fetchUser
 }
 
-function App(props: Props) {
-  const user: User = useSelector((state: AppState) => state.user);
-  const auth = useSelector((state: AppState) => state.auth);
+const connector = connect(mapState, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const App = (props: PropsFromRedux): JSX.Element => {
+  const {user, auth, fetchUser} = props;
   const getUserId = (user: User) => user ? user.ID : null
   let id = getUserId(user)
   useEffect(() => {
     fetchUser();
   }, [id, auth, fetchUser]);
-
-
 
   return (
     <Router history={history}>
@@ -69,7 +76,7 @@ function App(props: Props) {
           <Route
             path="/projects/new"
             exact
-            render={() => <ProjectNew show={true} history={history} />}
+            render={() => <ProjectNew show={true}/>}
           />
           <Route path="/projects/show/:id" exact component={ProjectShow} />
         </Switch>
@@ -78,4 +85,4 @@ function App(props: Props) {
   );
 }
 
-export default connect(null, { fetchUser })(App);
+export default connector(App);
