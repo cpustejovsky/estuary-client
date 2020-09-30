@@ -9,7 +9,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
-import { User, AppState } from "../../models/"
+import { AppState } from "../../models/"
 
 //TODO: potential memory leak here because I'm unmounting and not cleaning up. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function
 //TODO: replace all the 'any' types
