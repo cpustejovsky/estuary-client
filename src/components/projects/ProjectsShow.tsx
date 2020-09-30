@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import { connect, useSelector, DefaultRootState } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { fetchProjects, fetchCompleteProjects } from "../../actions";
 import _ from "lodash";
 import Loader from "../partials/Loader";
 import { Link as RouterLink, Redirect } from "react-router-dom";
 import {
-  Link,
   Button,
   Card,
   CardContent,
@@ -15,21 +14,33 @@ import {
 import AddIcon from "@material-ui/icons/Add";
 import { User, AppState } from "../../models/"
 
-interface Props {
-  done: boolean,
-  history: any,
-  match: any,
-  fetchProjects: () => (dispatch: any) => Promise<void>,
-  fetchCompleteProjects: () => (dispatch: any) => Promise<void>,
+const mapState = (state: AppState) => ({
+  auth: state.auth,
+  user: state.user,
+  projects: Object.values(state.projects)
+})
+
+const mapDispatch = {
+  fetchProjects,
+  fetchCompleteProjects
 }
 
-function ProjectsShow(props: Props) {
+const connector = connect(mapState, mapDispatch)
 
-  const { fetchCompleteProjects, fetchProjects, history, done, match } = props;
+type PropsFromRedux = ConnectedProps<typeof connector>
 
-  const auth = useSelector((state: AppState) => state.auth);
-  const user: User = useSelector((state: AppState) => state.user);
-  const projects = useSelector((state: AppState) => Object.values(state.projects));
+type Props = PropsFromRedux & {
+  done: boolean,
+  match: any,
+}
+
+
+
+const ProjectsShow = (props: Props): JSX.Element => {
+  const {done, match, auth, user, projects, fetchProjects, fetchCompleteProjects } = props;
+  // const auth = useSelector((state: AppState) => state.auth);
+  // const user: User = useSelector((state: AppState) => state.user);
+  // const projects = useSelector((state: AppState) => Object.values(state.projects));
   useEffect(() => {
     if (done) {
       fetchCompleteProjects();
@@ -99,6 +110,6 @@ function ProjectsShow(props: Props) {
   }
 }
 
-export default connect(null, { fetchProjects, fetchCompleteProjects })(
-  ProjectsShow
-);
+
+
+export default connector(ProjectsShow)

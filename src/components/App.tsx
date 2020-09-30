@@ -56,14 +56,14 @@ function App(props: Props) {
             path="/projects/list/"
             exact
             render={({match}) => (
-              <ProjectsShow done={false} history={history} match={match} />
+              <ProjectsShow done={false} match={match} />
             )}
           />
           <Route
             path="/projects/list/done"
             exact
             render={({ match }) => (
-              <ProjectsShow done={true} history={history} match={match} />
+              <ProjectsShow done={true} match={match} />
             )}
           />
           <Route
