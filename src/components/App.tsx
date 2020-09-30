@@ -19,22 +19,13 @@ import ProjectShow from "./projects/ProjectShow";
 import ProjectsShow from "./projects/ProjectsShow";
 import ProjectNew from "./projects/ProjectNew";
 import Timer from "./notes/organize/Timer";
-
+import { User } from "../models/User"
 type Props = {
-  fetchUser(): (dispatch: any) => Promise<void> 
+  fetchUser(): (dispatch: any) => Promise<void>
 }
 
 
 function App(props: Props) {
-  type User = {
-    ID: string
-    FirstName: string,
-    LastName: string,
-    EmailAddress: string,
-    EmailUpdates: boolean,
-    AdvancedView: boolean,
-  }
-
   interface AppState extends DefaultRootState {
     user: User
     auth: string
@@ -54,7 +45,7 @@ function App(props: Props) {
 
   return (
     <Router history={history}>
-      <Header user={user} history={history}/>
+      <Header user={user} />
       <div className="site">
         <Switch>
           <Route path="/" exact component={Landing} />

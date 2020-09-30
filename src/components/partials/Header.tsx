@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import NoteHeader from "./NoteHeader";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -14,6 +13,7 @@ import {
   Hidden,
 } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
+import { User } from "../../models/User"
 
 const useStyles = makeStyles((theme) => ({
   menuContainer: {
@@ -37,14 +37,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header() {
+interface Props {
+  user: User,
+}
+
+export default function Header(props: Props) {
+  const { user } = props
   let loc = useLocation().pathname;
   let notesPage = loc.includes("notes") && !loc.includes("organize");
-  const user = useSelector((state) => state.user);
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState<null | EventTarget>(null);
 
-  const handleClick = (event) => {
+  const handleClick = (event: MouseEvent) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -56,7 +60,7 @@ export default function Header() {
     if (user) {
       return (
         //TODO: add breakpoints and mediaqueries to change properties based on mobile or desktop
-        <div className={classes.menuItems} style={{width: "100%", justifyContent: "flex-end"}}>
+        <div className={classes.menuItems} style={{ width: "100%", justifyContent: "flex-end" }}>
           <MenuItem component={RouterLink} to="/user">
             {user.FirstName}
           </MenuItem>
@@ -105,7 +109,7 @@ export default function Header() {
         >
           Projects
         </MenuItem>
-        {mobile ? <hr style={{width: "100%"}}/> : null}
+        {mobile ? <hr style={{ width: "100%" }} /> : null}
         {renderAuth()}
       </div>
     );
@@ -138,7 +142,9 @@ export default function Header() {
             color="inherit"
             aria-label="menu"
           >
-            <MenuIcon aria-haspopup="true" onClick={handleClick} />
+            <IconButton onClick={(event) => { handleClick(event) }} >
+              <MenuIcon aria-haspopup="true" />
+            </IconButton>
             <Menu
               anchorEl={anchorEl}
               keepMounted
