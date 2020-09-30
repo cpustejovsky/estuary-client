@@ -71,7 +71,7 @@ export default function Header(props: Props) {
       );
     } else {
       return (
-        <div className={classes.menuItems}>
+        <div className={classes.menuItems} style={{ width: "100%", justifyContent: "flex-end" }}>
           <MenuItem component={RouterLink} to="/login">
             Log in
           </MenuItem>
@@ -143,7 +143,7 @@ export default function Header(props: Props) {
             aria-label="menu"
           >
             <IconButton onClick={handleClick} >
-              <MenuIcon aria-haspopup="true" />
+              <MenuIcon style={{color: "white"}} aria-haspopup="true" />
             </IconButton>
             <Menu
               anchorEl={anchorEl}
@@ -156,7 +156,7 @@ export default function Header(props: Props) {
           </IconButton>
         </Hidden>
         <Hidden smDown>
-          <div className={classes.menuContainer}>{renderMenu()}</div>
+            <div className={classes.menuContainer}>{renderMenu()}</div>
         </Hidden>
       </Toolbar>
       {notesPage ? <NoteHeader /> : null}
