@@ -19,20 +19,12 @@ import ProjectShow from "./projects/ProjectShow";
 import ProjectsShow from "./projects/ProjectsShow";
 import ProjectNew from "./projects/ProjectNew";
 import Timer from "./notes/organize/Timer";
-import { User } from "../models/User"
+import { User, AppSate } from "../models/."
 type Props = {
   fetchUser(): (dispatch: any) => Promise<void>
 }
 
-
 function App(props: Props) {
-  interface AppState extends DefaultRootState {
-    user: User
-    auth: string
-  }
-
-
-
   const user: User = useSelector((state: AppState) => state.user);
   const auth = useSelector((state: AppState) => state.auth);
   const getUserId = (user: User) => user ? user.ID : null
@@ -63,7 +55,7 @@ function App(props: Props) {
           <Route
             path="/projects/list/"
             exact
-            render={({ match }) => (
+            render={({match}) => (
               <ProjectsShow done={false} history={history} match={match} />
             )}
           />
