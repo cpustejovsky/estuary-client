@@ -1,29 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
-import { connect } from "react-redux";
-import { login } from "../../actions";
 import { Button, CardActions, TextField } from "@material-ui/core/";
 
-const Login = (props) => {
-  const submitValues = (values) => {
-    let history = props.history;
-    props.login(values, history);
-  };
+export default function Login() {
 
-  let loginData = {
-    emailAddress: "",
-    password: "",
-  };
+  const [NoEmailFound, setNoEmailFound] = useState<boolean>(false)
+  const resetPassword = (email: string) => {
+    setNoEmailFound(true)
+  }
 
   return (
     <div className="center">
-      <h2>Howdy!</h2>
-      <p>Let's get you logged in</p>
+      <h2>Password Reset</h2>
+      <p>Please Enter Your Email Address</p>
       <Formik
-        initialValues={loginData}
+        initialValues={{ emailAddress: "" }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            submitValues(values);
+            resetPassword(values.emailAddress)
             setSubmitting(false);
           }, 400);
         }}
@@ -32,6 +26,8 @@ const Login = (props) => {
           <form onSubmit={handleSubmit} noValidate>
             <div>
               <TextField
+                error={NoEmailFound ? true: false}
+                helperText={NoEmailFound ? "There are no records with that email address": ""}
                 name="emailAddress"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -41,19 +37,6 @@ const Login = (props) => {
                 variant="outlined"
               />
             </div>
-            <br />
-            <div>
-              <TextField
-                name="password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                fullWidth
-                label="Password"
-                type="password"
-                variant="outlined"
-              />
-            </div>
-
             <CardActions
               className="margin-top"
               style={{ justifyContent: "center" }}
@@ -65,17 +48,12 @@ const Login = (props) => {
                 variant="contained"
                 color="primary"
               >
-                Log In
+                Submit
               </Button>
             </CardActions>
-            <p style={{ textAlign: "center" }}>
-              <a href="/password-reset">Forgot Your Password?</a>
-            </p>
           </form>
         )}
       </Formik>
     </div>
   );
 };
-
-export default connect(null, { login })(Login);
