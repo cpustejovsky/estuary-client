@@ -2,9 +2,9 @@ import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { AppState } from "../../models/"
 import { Formik } from "formik";
-import { Button, CardActions, TextField } from "@material-ui/core/";
-import { resetPassword } from "../../actions"
+import { Button, CardActions, TextField, useTheme } from "@material-ui/core/";
 
+import { resetPassword } from "../../actions"
 const mapState = (state: AppState) => ({
   auth: state.auth,
 })
@@ -17,6 +17,7 @@ const connector = connect(mapState, mapDispatch)
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 const PasswordReset = (props: PropsFromRedux) => {
+  const theme = useTheme();
   const {auth, resetPassword} = props;
   const renderResponseMessage = () => {
     let text
@@ -32,10 +33,9 @@ const PasswordReset = (props: PropsFromRedux) => {
         break;
     }
     return (
-      <p>{text}</p>
+      <p style={{color: auth === "error" ? theme.palette.warning.main: "black"}}>{text}</p>
     )
   }
-  console.log(auth)
   return (
     <div className="center">
       <h2>Password Reset</h2>

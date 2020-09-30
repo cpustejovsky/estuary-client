@@ -6,6 +6,7 @@ import history from "../history";
 import Header from "./partials/Header";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
+import PasswordReset from "./auth/PasswordReset";
 import About from "./about/About";
 import Landing from "./Landing";
 import UserShow from "./user/UserShow";
@@ -20,7 +21,27 @@ import ProjectsShow from "./projects/ProjectsShow";
 import ProjectNew from "./projects/ProjectNew";
 import Timer from "./notes/organize/Timer";
 import { User, AppState } from "../models/."
-import PasswordReset from "./auth/PasswordReset";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles"
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#757ce8',
+      main: '#3f50b5',
+      dark: '#002884',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+    warning: {
+      main: '#CC3300'
+    }
+  },
+});
 
 const mapState = (state: AppState) => ({
   auth: state.auth,
@@ -36,7 +57,7 @@ const connector = connect(mapState, mapDispatch)
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 const App = (props: PropsFromRedux): JSX.Element => {
-  const {user, auth, fetchUser} = props;
+  const { user, auth, fetchUser } = props;
   const getUserId = (user: User) => user ? user.ID : null
   let id = getUserId(user)
   useEffect(() => {
@@ -45,44 +66,46 @@ const App = (props: PropsFromRedux): JSX.Element => {
 
   return (
     <Router history={history}>
-      <Header user={user} />
-      <div className="site">
-        <Switch>
-          <Route path="/" exact component={Landing} />
-          <Route path="/test" exact component={Test} />
-          <Route path="/timer" exact component={Timer} />
-          <Route path="/about" exact component={About} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/signup" exact component={Signup} />
-          <Route path="/password-reset" exact component={PasswordReset} />
-          <Route path="/free-writes" exact component={FreeWritesShow} />
-          <Route path="/free-writes/new" exact component={FreeWritesNew} />
-          <Route path="/notes/organize" exact component={NotesOrganize} />
-          <Route path="/notes/:name" exact component={NotesShow} />
-          <Route path="/user" exact component={UserShow} />
-          <Route path="/user/edit" exact component={UserEdit} />
-          <Route
-            path="/projects/list/"
-            exact
-            render={({match}) => (
-              <ProjectsShow done={false} match={match} />
-            )}
-          />
-          <Route
-            path="/projects/list/done"
-            exact
-            render={({ match }) => (
-              <ProjectsShow done={true} match={match} />
-            )}
-          />
-          <Route
-            path="/projects/new"
-            exact
-            render={() => <ProjectNew show={true}/>}
-          />
-          <Route path="/projects/show/:id" exact component={ProjectShow} />
-        </Switch>
-      </div>
+      <ThemeProvider theme={theme}>
+        <Header user={user} />
+        <div className="site">
+          <Switch>
+            <Route path="/" exact component={Landing} />
+            <Route path="/test" exact component={Test} />
+            <Route path="/timer" exact component={Timer} />
+            <Route path="/about" exact component={About} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/signup" exact component={Signup} />
+            <Route path="/password-reset" exact component={PasswordReset} />
+            <Route path="/free-writes" exact component={FreeWritesShow} />
+            <Route path="/free-writes/new" exact component={FreeWritesNew} />
+            <Route path="/notes/organize" exact component={NotesOrganize} />
+            <Route path="/notes/:name" exact component={NotesShow} />
+            <Route path="/user" exact component={UserShow} />
+            <Route path="/user/edit" exact component={UserEdit} />
+            <Route
+              path="/projects/list/"
+              exact
+              render={({ match }) => (
+                <ProjectsShow done={false} match={match} />
+              )}
+            />
+            <Route
+              path="/projects/list/done"
+              exact
+              render={({ match }) => (
+                <ProjectsShow done={true} match={match} />
+              )}
+            />
+            <Route
+              path="/projects/new"
+              exact
+              render={() => <ProjectNew show={true} />}
+            />
+            <Route path="/projects/show/:id" exact component={ProjectShow} />
+          </Switch>
+        </div>
+      </ThemeProvider>
     </Router>
   );
 }

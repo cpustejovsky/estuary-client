@@ -1,6 +1,5 @@
-import { getInstance} from "./index"
+import { getInstance } from "./index";
 import { LOG_IN, SIGN_UP, PASSWORD_RESET } from "./types.ts";
-
 
 export const login = (values, history) => async (dispatch) => {
   let instance = await getInstance();
@@ -23,18 +22,16 @@ export const signUp = (values, history) => async (dispatch) => {
 };
 
 export const resetPassword = (values) => async (dispatch) => {
-  let instance = await getInstance()
+  let instance = await getInstance();
   let payload;
   try {
-    let response = await instance.post("/password-reset", values)
-    console.log(response.data)
-    payload = response.data
+    let response = await instance.post("/password-reset", values);
+    payload = response.data;
   } catch (error) {
-    console.log(error)
-    payload = "error"
+    payload = "error";
   }
   dispatch({
     type: PASSWORD_RESET,
     payload: payload,
   });
-}
+};
