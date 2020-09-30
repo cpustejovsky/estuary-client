@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import reducers from "./reducers";
 import "./style.scss";
-import App from "./components/App";
+import App from "./components/App.tsx";
 
 ReactGA.initialize(process.env.REACT_APP_GA_KEY);
 ReactGA.pageview(window.location.pathname + window.location.search);

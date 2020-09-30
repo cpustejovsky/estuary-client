@@ -1,33 +1,57 @@
 import React, { useEffect } from "react";
 import { Router, Route, Switch } from "react-router-dom";
-import { connect, useSelector } from "react-redux";
+import { connect, DefaultRootState, useSelector } from "react-redux";
 import { fetchUser } from "../actions";
 import history from "../history";
 import Header from "./partials/Header";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import About from "./about/About";
-import Landing from "./Landing.tsx";
+import Landing from "./Landing";
 import UserShow from "./user/UserShow";
 import UserEdit from "./user/UserEdit";
 import NotesShow from "./notes/show/NotesShow";
 import NotesOrganize from "./notes/organize/flow/NotesOrganize";
 import FreeWritesShow from "./freewrites/FreeWritesShow";
 import FreeWritesNew from "./freewrites/FreeWritesNew";
-import Test from "./Test.tsx";
+import Test from "./Test";
 import ProjectShow from "./projects/ProjectShow";
 import ProjectsShow from "./projects/ProjectsShow";
 import ProjectNew from "./projects/ProjectNew";
 import Timer from "./notes/organize/Timer";
 
-function App({ fetchUser }) {
-  const user = useSelector((state) => state.user);
-  const auth = useSelector((state) => state.auth);
-  const getUserId = (user) => user ? user.ID : null
-  let id = getUserId()
+type Props = {
+  fetchUser(): (dispatch: any) => Promise<void> 
+}
+
+
+function App(props: Props) {
+  type User = {
+    ID: string
+    FirstName: string,
+    LastName: string,
+    EmailAddress: string,
+    EmailUpdates: boolean,
+    AdvancedView: boolean,
+  }
+
+  interface AppState extends DefaultRootState {
+    user: User
+    auth: string
+  }
+
+
+
+  const user: User = useSelector((state: AppState) => state.user);
+  const auth = useSelector((state: AppState) => state.auth);
+  const getUserId = (user: User) => user ? user.ID : null
+  let id = getUserId(user)
   useEffect(() => {
     fetchUser();
   }, [id, auth, fetchUser]);
+
+
+
   return (
     <Router history={history}>
       <Header user={user} history={history}/>
