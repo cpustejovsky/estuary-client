@@ -2,23 +2,25 @@ import React, { useState } from "react";
 import { Formik } from "formik";
 import { Button, CardActions, TextField } from "@material-ui/core/";
 import { getInstance } from "../../actions/index"
-
+import ReCaptcha from "./ReCaptcha"
 export default function Login() {
 
   const [requestSent, setRequestSent] = useState<string | boolean>(false)
+  const [reCaptcha, showReCaptcha] = useState(false)
   const resetPassword = async (email: string) => {
     // const instance = await getInstance()
     // const response = await instance.post("/password-reset", email)
     let data: string;
     if (email === "charles.pustejovsky@gmail.com") {
       data = "email found"
-    } else if (email === "charles.pustejovsky2@gmail.com"){
+    } else if (email === "charles.pustejovsky2@gmail.com") {
       data = "no email found"
     } else {
       data = "error"
     }
     if (data === "email found" || data === "no email found") {
       setRequestSent(true)
+      showReCaptcha(true)
     } else {
       setRequestSent("error")
     }
@@ -38,7 +40,7 @@ export default function Login() {
         break;
     }
     return (
-      <p>{ text }</p>
+      <p>{text}</p>
     )
   }
 
@@ -82,6 +84,7 @@ export default function Login() {
                 Submit
               </Button>
             </CardActions>
+            {reCaptcha ? <ReCaptcha></ReCaptcha> : null}
             {renderResponseMessage()}
           </form>
         )}
