@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { connect, useSelector } from "react-redux";
+import { connect, useSelector, DefaultRootState } from "react-redux";
 import { fetchProjects, fetchCompleteProjects } from "../../actions";
 import _ from "lodash";
 import Loader from "../partials/Loader";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, Redirect } from "react-router-dom";
 import {
   Link,
   Button,
@@ -13,17 +13,23 @@ import {
   Fab,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import { User, AppState } from "../../models/"
 
-function ProjectsShow({
-  fetchProjects,
-  fetchCompleteProjects,
-  history,
-  done,
-  match,
-}) {
-  const auth = useSelector((state) => state.auth);
-  const user = useSelector((state) => state.user);
-  const projects = useSelector((state) => Object.values(state.projects));
+interface Props {
+  done: boolean,
+  history: any,
+  match: any,
+  fetchProjects: () => (dispatch: any) => Promise<void>,
+  fetchCompleteProjects: () => (dispatch: any) => Promise<void>,
+}
+
+function ProjectsShow(props: Props) {
+
+  const { fetchCompleteProjects, fetchProjects, history, done, match } = props;
+
+  const auth = useSelector((state: AppState) => state.auth);
+  const user: User = useSelector((state: AppState) => state.user);
+  const projects = useSelector((state: AppState) => Object.values(state.projects));
   useEffect(() => {
     if (done) {
       fetchCompleteProjects();
@@ -72,24 +78,24 @@ function ProjectsShow({
           )}
         </div>
         {renderProjects()}
-        <div align="center">
+        <div style={{ alignContent: "center" }}>
           {done ? (
             // TODO: FIX THIS AND MAKE USEEFFECT WORK
-            <Button component={Link} href="/projects/list" underlined="none">
+            <Button component={RouterLink} to="/projects/list">
               Back to Projects
             </Button>
           ) : (
-            <Button component={RouterLink} to="/projects/list/done">
-              View Completed Projects
-            </Button>
-          )}
+              <Button component={RouterLink} to="/projects/list/done">
+                View Completed Projects
+              </Button>
+            )}
         </div>
       </div>
     );
-  } else if (auth === null && user === null) {
+  } else if (auth === "" && user === null) {
     return <Loader />;
-  } else if (!auth && !auth) {
-    return <>{history.push("/login")}</>;
+  } else {
+    return <Redirect to="/login" />;
   }
 }
 

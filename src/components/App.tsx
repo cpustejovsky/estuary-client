@@ -19,7 +19,7 @@ import ProjectShow from "./projects/ProjectShow";
 import ProjectsShow from "./projects/ProjectsShow";
 import ProjectNew from "./projects/ProjectNew";
 import Timer from "./notes/organize/Timer";
-import { User, AppSate } from "../models/."
+import { User, AppState } from "../models/."
 type Props = {
   fetchUser(): (dispatch: any) => Promise<void>
 }
