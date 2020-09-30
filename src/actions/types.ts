@@ -1,6 +1,7 @@
 //AUTH
 export const SIGN_UP: string = "SIGN_UP";
 export const LOG_IN: string = "LOG_IN";
+export const PASSWORD_RESET: string = "PASSWORD_RESET";
 //USER
 export const FETCH_USER: string = "FETCH_USER";
 export const UPDATE_USER: string = "UPDATE_USER";

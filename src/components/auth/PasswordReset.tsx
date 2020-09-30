@@ -1,32 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
+import { connect, ConnectedProps } from "react-redux";
+import { AppState } from "../../models/"
 import { Formik } from "formik";
 import { Button, CardActions, TextField } from "@material-ui/core/";
-import { getInstance } from "../../actions/index"
+import { resetPassword } from "../../actions"
 
-export default function Login() {
+const mapState = (state: AppState) => ({
+  auth: state.auth,
+})
+const mapDispatch = {
+  resetPassword
+}
 
-  const [requestSent, setRequestSent] = useState<string | boolean>(false)
-  const resetPassword = async (email: string) => {
-    // const instance = await getInstance()
-    // const response = await instance.post("/password-reset", email)
-    let data: string;
-    if (email === "charles.pustejovsky@gmail.com") {
-      data = "email found"
-    } else if (email === "charles.pustejovsky2@gmail.com"){
-      data = "no email found"
-    } else {
-      data = "error"
-    }
-    if (data === "email found" || data === "no email found") {
-      setRequestSent(true)
-    } else {
-      setRequestSent("error")
-    }
-  }
+const connector = connect(mapState, mapDispatch)
 
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const PasswordReset = (props: PropsFromRedux) => {
+  const {auth, resetPassword} = props;
   const renderResponseMessage = () => {
     let text
-    switch (requestSent) {
+    switch (auth) {
       case false:
         text = ""
         break;
@@ -38,10 +32,10 @@ export default function Login() {
         break;
     }
     return (
-      <p>{ text }</p>
+      <p>{text}</p>
     )
   }
-
+  console.log(auth)
   return (
     <div className="center">
       <h2>Password Reset</h2>
@@ -49,8 +43,8 @@ export default function Login() {
       <Formik
         initialValues={{ emailAddress: "" }}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            resetPassword(values.emailAddress)
+          setTimeout(async () => {
+            resetPassword(values)
             setSubmitting(false);
           }, 400);
         }}
@@ -89,3 +83,5 @@ export default function Login() {
     </div>
   );
 };
+
+export default connector(PasswordReset)
