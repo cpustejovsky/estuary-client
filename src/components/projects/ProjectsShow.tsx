@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect, useSelector } from "react-redux";
 import { fetchProjects, fetchCompleteProjects } from "../../actions";
 import _ from "lodash";
-import Loader from "../partials/Loader.tsx";
+import Loader from "../partials/Loader";
 import { Link as RouterLink } from "react-router-dom";
 import {
   Link,
