@@ -20,6 +20,7 @@ import ProjectsShow from "./projects/ProjectsShow";
 import ProjectNew from "./projects/ProjectNew";
 import Timer from "./notes/organize/Timer";
 import { User, AppState } from "../models/."
+import PasswordReset from "./auth/PasswordReset";
 
 const mapState = (state: AppState) => ({
   auth: state.auth,
@@ -53,6 +54,7 @@ const App = (props: PropsFromRedux): JSX.Element => {
           <Route path="/about" exact component={About} />
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
+          <Route path="/password-reset" exact component={PasswordReset} />
           <Route path="/free-writes" exact component={FreeWritesShow} />
           <Route path="/free-writes/new" exact component={FreeWritesNew} />
           <Route path="/notes/organize" exact component={NotesOrganize} />

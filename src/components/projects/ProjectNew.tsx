@@ -3,13 +3,13 @@ import { Formik, Field } from "formik";
 import { connect, ConnectedProps } from "react-redux";
 import { Button, TextField } from "@material-ui/core";
 import DateFnsUtils from "@date-io/date-fns";
-import {Redirect} from "react-router-dom"
+import { Redirect } from "react-router-dom"
 import { createProject, updateProject } from "../../actions";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
-import { User, AppState } from "../../models/"
+import { AppState } from "../../models/"
 
 //TODO: potential memory leak here because I'm unmounting and not cleaning up. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function
 //TODO: replace all the 'any' types
@@ -42,7 +42,7 @@ type Props = PropsFromRedux & {
 
 
 function ProjectNew(props: Props) {
-  const { 
+  const {
     id,
     show,
     note,
