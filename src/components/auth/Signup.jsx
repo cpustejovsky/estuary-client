@@ -9,7 +9,10 @@ const SignUp = (props) => {
   const submitValues = (values) => {
     if (emailValidator(values.emailAddress)) {
       setValidEmail(false);
-    } else {
+    } else if(values.password !== values.password2){
+      setMatchingPassword(false)
+    }
+    else {
       props.signUp(values, props.history);
     }
   };
@@ -19,9 +22,11 @@ const SignUp = (props) => {
     lastName: "",
     emailAddress: "",
     password: "",
+    password2: "",
   };
 
   const [validEmail, setValidEmail] = useState(true);
+  const [matchingPassword, setMatchingPassword] = useState(true);
 
   return (
     <div className="center">
@@ -85,6 +90,21 @@ const SignUp = (props) => {
                 onBlur={handleBlur}
                 fullWidth
                 label="Password"
+                type="password"
+                variant="outlined"
+              />
+            </div>
+            <br />
+            <div>
+              <TextField
+                required
+                error={matchingPassword ? false : true}
+                helperText={matchingPassword ? "" : "Passwords do not match"}
+                name="password2"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                fullWidth
+                label="Confirm Password"
                 type="password"
                 variant="outlined"
               />
