@@ -7,6 +7,7 @@ import Header from "./partials/Header";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import PasswordReset from "./auth/PasswordReset";
+import NewPassword from "./auth/NewPassword";
 import About from "./about/About";
 import Landing from "./Landing";
 import UserShow from "./user/UserShow";
@@ -77,6 +78,7 @@ const App = (props: PropsFromRedux): JSX.Element => {
             <Route path="/login" exact component={Login} />
             <Route path="/signup" exact component={Signup} />
             <Route path="/password-reset" exact component={PasswordReset} />
+            <Route path="/new-password" exact component={NewPassword} />
             <Route path="/free-writes" exact component={FreeWritesShow} />
             <Route path="/free-writes/new" exact component={FreeWritesNew} />
             <Route path="/notes/organize" exact component={NotesOrganize} />
