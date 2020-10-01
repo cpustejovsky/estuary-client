@@ -5,7 +5,7 @@ import "./projects";
 import "./auth";
 import axios from "axios";
 
-export { signUp, login, resetPassword } from "./auth";
+export { signUp, login, resetPassword, newPassword } from "./auth";
 export { fetchUser, updateUser, deleteUser } from "./user";
 export { fetchFreeWrites, createFreeWrite } from "./freeWrites";
 export {
