@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { AppState } from "../../models/"
 import { Formik } from "formik";
-import { Redirect } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Button, CardActions, TextField, useTheme } from "@material-ui/core/";
 import { newPassword } from "../../actions"
 import emailValidator from "../../utils/emailvalidator"
@@ -18,11 +18,15 @@ const connector = connect(mapState, mapDispatch)
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const NewPassword = (props: PropsFromRedux) => {
+type Props = PropsFromRedux & {
+  history: any
+}
+
+const NewPassword = (props: Props) => {
   let token = window.location.search.replace(/^([?]token=)/, "")
   const theme = useTheme();
-  const { auth, newPassword } = props;
-
+  const { auth, newPassword, history } = props;
+  console.log(history)
   const [validEmail, setValidEmail] = useState(true);
   const [matchingPassword, setMatchingPassword] = useState(true);
 
@@ -58,7 +62,11 @@ const NewPassword = (props: PropsFromRedux) => {
         text = ""
         break;
       case "success":
-        return <Redirect to="/login" />
+        return (
+          <p style={{ textAlign: "center" }}>
+            Password updated. You can now <Link to="/login">login</Link>.
+          </p>
+        )
       case "no token found":
         text = "No token was found that matched your query parameter"
         break;
