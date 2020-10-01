@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { AppState } from "../../models/"
 import { Formik } from "formik";
 import { Button, CardActions, TextField, useTheme } from "@material-ui/core/";
-
 import { resetPassword } from "../../actions"
+import emailValidator from "../../utils/emailvalidator"
+
 const mapState = (state: AppState) => ({
   auth: state.auth,
 })
@@ -18,7 +19,18 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 
 const PasswordReset = (props: PropsFromRedux) => {
   const theme = useTheme();
-  const {auth, resetPassword} = props;
+  const { auth, resetPassword } = props;
+
+  const submitValues = (values: {emailAddress: string}) => {
+    if (emailValidator(values.emailAddress)) {
+      setValidEmail(false);
+    } else {
+      resetPassword(values)
+    }
+  };
+  
+  const [validEmail, setValidEmail] = useState(true);
+
   const renderResponseMessage = () => {
     let text
     switch (auth) {
@@ -33,7 +45,7 @@ const PasswordReset = (props: PropsFromRedux) => {
         break;
     }
     return (
-      <p style={{color: auth === "error" ? theme.palette.warning.main: "black"}}>{text}</p>
+      <p style={{ color: auth === "error" ? theme.palette.warning.main : "black" }}>{text}</p>
     )
   }
   return (
@@ -44,7 +56,7 @@ const PasswordReset = (props: PropsFromRedux) => {
         initialValues={{ emailAddress: "" }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(async () => {
-            resetPassword(values)
+            submitValues(values);
             setSubmitting(false);
           }, 400);
         }}
@@ -53,6 +65,9 @@ const PasswordReset = (props: PropsFromRedux) => {
           <form onSubmit={handleSubmit} noValidate>
             <div>
               <TextField
+                required
+                error={validEmail ? false : true}
+                helperText="Invalid Email Address"
                 name="emailAddress"
                 onChange={handleChange}
                 onBlur={handleBlur}
