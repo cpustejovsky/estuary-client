@@ -66,7 +66,7 @@ const SignUp = (props) => {
               <TextField
                 required
                 error={validEmail ? false : true}
-                helperText="Invalid Email Address"
+                helperText={validEmail ? "" : "Invalid Email Address"}
                 name="emailAddress"
                 onChange={handleChange}
                 onBlur={handleBlur}
