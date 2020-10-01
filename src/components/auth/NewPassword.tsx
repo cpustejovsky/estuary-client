@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { AppState } from "../../models/"
 import { Formik } from "formik";
+import { Redirect } from "react-router-dom"
 import { Button, CardActions, TextField, useTheme } from "@material-ui/core/";
 import { newPassword } from "../../actions"
 import emailValidator from "../../utils/emailvalidator"
@@ -49,27 +50,33 @@ const NewPassword = (props: PropsFromRedux) => {
     }
   };
 
-  const renderResponseMessage = () => {
-    let text
+  const renderResponseMessage = (): JSX.Element => {
+    console.log(auth)
+    let text: string = ""
     switch (auth) {
       case false:
         text = ""
         break;
-      case true:
-        text = "email has been sent to the account"
+      case "success":
+        return <Redirect to="/login" />
+      case "no token found":
+        text = "No token was found that matched your query parameter"
         break;
-      case "error":
-        text = "a system error has occurred. Please contact support"
+      case "expired token":
+        text = "Your password reset token is expired. Please repeat the process and complete it within 60 minutes"
+        break;
+      default:
+        text = "An error occurred."
         break;
     }
     return (
-      <p style={{ color: auth === "error" ? theme.palette.warning.main : "black" }}>{text}</p>
+      <p style={{ color: theme.palette.warning.main }}>{text}</p>
     )
   }
   return (
     <div className="center">
-      <h2>Password Reset</h2>
-      <p>Please Enter Your Email Address</p>
+      <h2>New Password</h2>
+      <p>Please Enter Your Email Address and New Password</p>
       <Formik
         initialValues={newPasswordValues}
         onSubmit={(values, { setSubmitting }) => {

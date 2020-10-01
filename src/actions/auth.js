@@ -43,16 +43,10 @@ export const newPassword = (values) => async (dispatch) => {
     let response = await instance.post("/new-password", values);
     payload = response.data;
   } catch (error) {
-    if (error === "no token found"){
-      payload = "no token found error";
-    } else if (error === "expired token") {
-      payload = "duplicate error"
-    } else {
-      payload = "error"
-    }
+    payload = error
   }
   dispatch({
-    type: PASSWORD_RESET,
+    type: PASSWORD_RESET, 
     payload: payload,
   });
 };
