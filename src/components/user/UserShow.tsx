@@ -1,6 +1,8 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { connect, useSelector } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
+import { Redirect } from "react-router-dom"
+import { AppState } from "../../models/"
 import {
   Button,
   Card,
@@ -8,10 +10,18 @@ import {
   CardActions,
   Typography,
 } from "@material-ui/core";
+import Loader from "../partials/Loader"
+const mapState = (state: AppState) => ({
+  auth: state.auth,
+  user: state.user
+})
 
-function User() {
-  const auth = useSelector((state) => state.auth);
-  const user = useSelector((state) => state.user);
+const connector = connect(mapState, {})
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const User = (props: PropsFromRedux) => {
+  const { user, auth } = props
   //TODO: Add Note Statistics In
   // const [stats, setStats] = useState({});
   // const fetchNotestatistics = async () => {
@@ -30,14 +40,14 @@ function User() {
 
   // renderStatistics(stats);
   if (!auth && !user) {
-    return "Loading";
+    return <Redirect push to="/login" />
   } else if (user) {
     return (
       <div>
         <Card raised>
           <CardContent className="card-content">
             <Typography gutterBottom variant="h4">
-              {user.displayName || user.FirstName} {user.LastName}
+              {user.FirstName} {user.LastName}
             </Typography>
             <p>
               <strong>Email Address: </strong>
@@ -65,6 +75,8 @@ function User() {
         </Card>
       </div>
     );
+  } else {
+    return <Loader />
   }
 }
-export default connect(null, {})(User);
+export default connector(User);
