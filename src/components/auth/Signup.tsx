@@ -1,12 +1,42 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { signUp } from "../../actions";
 import { Button, CardActions, TextField } from "@material-ui/core/";
 import emailValidator from "../../utils/emailvalidator";
 
-const SignUp = (props) => {
-  const submitValues = (values) => {
+
+const mapDispatch = {
+  signUp
+}
+
+const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux & {
+  history: any
+}
+
+const SignUp = (props: Props) => {
+
+  type SignUpData = {
+    firstName: string,
+    lastName: string,
+    emailAddress: string,
+    password: string,
+    password2: string,
+  }
+
+  let signupData: SignUpData = {
+    firstName: "",
+    lastName: "",
+    emailAddress: "",
+    password: "",
+    password2: "",
+  };
+
+  const submitValues = (values: SignUpData) => {
     if (emailValidator(values.emailAddress)) {
       setValidEmail(false);
     } else if (values.password !== values.password2) {
@@ -16,13 +46,6 @@ const SignUp = (props) => {
     }
   };
 
-  let signupData = {
-    firstName: "",
-    lastName: "",
-    emailAddress: "",
-    password: "",
-    password2: "",
-  };
 
   const [validEmail, setValidEmail] = useState(true);
   const [matchingPassword, setMatchingPassword] = useState(true);
