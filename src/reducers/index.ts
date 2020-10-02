@@ -6,6 +6,7 @@ import notesReducer from "./notesReducer";
 import projectsReducer from "./projectsReducer";
 import freeWritesReducer from "./freeWritesReducer";
 
+//TODO: specify action payload types
 export default combineReducers({
   auth: authReducer,
   user: userReducer,

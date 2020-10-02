@@ -1,6 +1,10 @@
-import { SIGN_UP, LOG_IN, PASSWORD_RESET } from "../actions/types.ts";
+import { SIGN_UP, LOG_IN, PASSWORD_RESET } from "../actions/types";
 
-export default function (state = false, action) {
+type Action = {
+  type: string,
+  payload: any
+}
+export default function (state = false, action: Action) {
   switch (action.type) {
     case SIGN_UP:
       return action.payload || false;

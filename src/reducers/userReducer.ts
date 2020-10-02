@@ -1,6 +1,11 @@
-import { UPDATE_USER, FETCH_USER, DELETE_USER } from "../actions/types.ts";
+import { UPDATE_USER, FETCH_USER, DELETE_USER } from "../actions/types";
 
-export default function (state = null, action) {
+type Action = {
+  type: string,
+  payload: any
+}
+
+export default function (state = null, action: Action) {
   switch (action.type) {
     case FETCH_USER:
       return action.payload || false;

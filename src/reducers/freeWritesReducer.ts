@@ -1,7 +1,12 @@
-import { CREATE_FREEWRITE, FETCH_FREEWRITES } from "../actions/types.ts";
+import { CREATE_FREEWRITE, FETCH_FREEWRITES } from "../actions/types";
 import _ from "lodash";
 
-export default function (state = {}, action) {
+type Action = {
+  type: string,
+  payload: any
+}
+
+export default function (state = {}, action: Action) {
   switch (action.type) {
     case FETCH_FREEWRITES:
       return { ...state, ..._.mapKeys(action.payload, "_id") } || false;

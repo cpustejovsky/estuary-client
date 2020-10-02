@@ -3,10 +3,16 @@ import {
   CREATE_PROJECT,
   DELETE_PROJECT,
   UPDATE_PROJECT,
-  FETCH_COMPLETED_PROJECTS
-} from "../actions/types.ts";
+  FETCH_COMPLETED_PROJECTS,
+} from "../actions/types";
+
+type Action = {
+  type: string;
+  payload: any;
+};
+
 import _ from "lodash";
-export default function (state = {}, action) {
+export default function (state = {}, action: Action) {
   switch (action.type) {
     //TODO: is this the best way to deal with projects? Maybe a case where hooks would be better?
     case FETCH_PROJECTS:
