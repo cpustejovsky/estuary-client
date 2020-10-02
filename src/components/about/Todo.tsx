@@ -3,7 +3,16 @@ import ListItem from "@material-ui/core/ListItem";
 import { Check, CropSquare } from "@material-ui/icons";
 import { green, grey } from "@material-ui/core/colors";
 
-const Todo = ({ complete, text, subtodo, subsubtodo }) => {
+
+type Props = {
+  complete?: boolean,
+  text: string | JSX.Element,
+  subtodo?: boolean,
+  subsubtodo?: boolean
+}
+
+const Todo = (props: Props) => {
+  const { complete, text, subtodo, subsubtodo } = props;
   if (complete) {
     return (
       <ListItem

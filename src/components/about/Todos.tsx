@@ -9,9 +9,10 @@ import {
   Switch,
 } from "@material-ui/core";
 export default function Todos() {
+
   const [checked, setChecked] = useState(false);
   return (
-    <Grid align="start">
+    <Grid>
       <Grid item>
         <Typography variant="h5" style={{ marginTop: "5%" }}>
           To-Dos
