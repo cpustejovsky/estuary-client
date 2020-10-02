@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 export default function Todos() {
 
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState<boolean>(false);
   return (
     <Grid>
       <Grid item>

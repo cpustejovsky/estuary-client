@@ -5,8 +5,8 @@ import { green, grey } from "@material-ui/core/colors";
 
 
 type Props = {
-  complete?: boolean,
   text: string | JSX.Element,
+  complete?: boolean,
   subtodo?: boolean,
   subsubtodo?: boolean
 }
