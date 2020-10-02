@@ -1,7 +1,7 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { connect, ConnectedProps } from "react-redux";
-import { Redirect } from "react-router-dom"
+import  Loader from "../partials/Loader"
 import { AppState } from "../../models/"
 import {
   Button,
@@ -10,7 +10,6 @@ import {
   CardActions,
   Typography,
 } from "@material-ui/core";
-import Loader from "../partials/Loader"
 const mapState = (state: AppState) => ({
   auth: state.auth,
   user: state.user
@@ -40,7 +39,7 @@ const User = (props: PropsFromRedux) => {
 
   // renderStatistics(stats);
   if (!auth && !user) {
-    return <Redirect push to="/login" />
+    return <Loader />;
   } else if (user) {
     return (
       <div>

@@ -80,34 +80,15 @@ const UserEdit = (props: Props) => {
   }
 
   const submitValues = (values: UserUpdateData) => {
+    console.log(values)
     updateUser(values, history);
   };
 
-  const updateDefault = (key: string) => user ? user[key] as boolean : false;
-
-  const [emailUpdateChecked, setEmailUpdateChecked] = React.useState<boolean>(
-    updateDefault("EmailUpdates")
-  );
-  const [advancedViewChecked, setAdvancedViewChecked] = React.useState<boolean>(
-    updateDefault("AdvancedView")
-  );
-
-  interface CustomEventTarget extends EventTarget {
-    emailUpdateChecked: boolean,
-    advancedViewChecked: boolean
-  }
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const customTarget = event.target as any as CustomEventTarget
-    setEmailUpdateChecked(!customTarget.emailUpdateChecked);
-    setAdvancedViewChecked(!customTarget.advancedViewChecked);
-  };
-
   let updatedData = {
-    FirstName: user.FirstName || "",
-    LastName: user.LastName || "",
-    EmailUpdates: user.EmailUpdates || false,
-    AdvancedView: user.AdvancedView || false,
+    FirstName: user ? user.FirstName : "",
+    LastName: user ? user.LastName : "",
+    EmailUpdates: user ? user.EmailUpdates : true,
+    AdvancedView: user ? user.AdvancedView : true,
   }
 
   if (user) {
@@ -130,6 +111,7 @@ const UserEdit = (props: Props) => {
               values,
               handleBlur,
               handleSubmit,
+              handleChange,
               isSubmitting,
             }) => (
                 <form onSubmit={handleSubmit}>
@@ -162,7 +144,7 @@ const UserEdit = (props: Props) => {
                       control={
                         <Checkbox
                           checked={
-                            emailUpdateChecked
+                            values.EmailUpdates
                           }
                           onChange={handleChange}
                           color="primary"
@@ -181,7 +163,7 @@ const UserEdit = (props: Props) => {
                       control={
                         <Checkbox
                           checked={
-                            advancedViewChecked
+                            values.AdvancedView
                           }
                           onChange={handleChange}
                           color="primary"
