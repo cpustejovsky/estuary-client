@@ -1,11 +1,20 @@
 import React, { useState } from "react";
-import MailchimpSubscribe from "react-mailchimp-subscribe";
+import MailchimpSubscribe, {EmailFormFields} from "react-mailchimp-subscribe";
 import { Button, TextField, FormControl } from "@material-ui/core";
 
-const url =
+const url: string =
   "https://cpustejovsky.us18.list-manage.com/subscribe/post?u=5255bcd054238b51c87af4a7b&amp;id=aaa9023f7d";
-const CustomForm = ({ status, message, onValidated, refs }) => {
-  const [email, setEmail] = useState("");
+
+type FormProps = {
+  status: string | null,
+  message: string | Error | null,
+  onValidated: (data: EmailFormFields) => void
+}
+
+const CustomForm = (formProps: FormProps) => {
+  const { status, message, onValidated} = formProps;
+  const [email, setEmail] = useState<string>("");
+
   const submit = () => {
     return (
       email &&
@@ -42,7 +51,7 @@ const CustomForm = ({ status, message, onValidated, refs }) => {
             htmlFor="email"
             data-error="wrong"
             style={{ color: "red" }}
-            dangerouslySetInnerHTML={{ __html: message }}
+            dangerouslySetInnerHTML={{ __html: typeof(message) === "string" ? message : "" }}
           />
         )}
         {status === "success" && (
@@ -50,7 +59,7 @@ const CustomForm = ({ status, message, onValidated, refs }) => {
             htmlFor="email"
             data-success="right"
             style={{ color: "green" }}
-            dangerouslySetInnerHTML={{ __html: message }}
+            dangerouslySetInnerHTML={{ __html: typeof(message) === "string" ? message : "" }}
           />
         )}
       </FormControl>
@@ -66,7 +75,7 @@ const MailChimpForm = () => {
           <CustomForm
             status={status}
             message={message}
-            onValidated={(formData) => subscribe(formData)}
+            onValidated={(formData: EmailFormFields) => subscribe(formData)}
           />
         );
       }}
