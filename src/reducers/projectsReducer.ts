@@ -5,13 +5,13 @@ import {
   UPDATE_PROJECT,
   FETCH_COMPLETED_PROJECTS,
 } from "../actions/types";
+import _ from "lodash";
 
 type Action = {
   type: string;
   payload: any;
 };
 
-import _ from "lodash";
 export default function (state = {}, action: Action) {
   switch (action.type) {
     //TODO: is this the best way to deal with projects? Maybe a case where hooks would be better?
