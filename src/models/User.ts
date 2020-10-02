@@ -5,4 +5,5 @@ export interface User {
   EmailAddress: string;
   EmailUpdates: boolean;
   AdvancedView: boolean;
+  [key: string] : boolean | string;
 }
