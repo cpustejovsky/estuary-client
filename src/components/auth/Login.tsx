@@ -1,19 +1,38 @@
 import React from "react";
 import { Formik } from "formik";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { login } from "../../actions";
 import { Button, CardActions, TextField } from "@material-ui/core/";
 
-const Login = (props) => {
-  const submitValues = (values) => {
+const mapDispatch = {
+  login
+}
+
+const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux & {
+  history: any
+}
+
+const Login = (props: Props) => {
+
+  type LoginData = {
+    emailAddress: string,
+    password: string,
+  }
+
+  let loginData: LoginData = {
+    emailAddress: "",
+    password: "",
+  };
+
+  const submitValues = (values: LoginData) => {
     let history = props.history;
     props.login(values, history);
   };
 
-  let loginData = {
-    emailAddress: "",
-    password: "",
-  };
 
   return (
     <div className="center">
@@ -78,4 +97,4 @@ const Login = (props) => {
   );
 };
 
-export default connect(null, { login })(Login);
+export default connector(Login);

@@ -153,4 +153,4 @@ const SignUp = (props: Props) => {
   );
 };
 
-export default connect(null, { signUp })(SignUp);
+export default connector(SignUp);
