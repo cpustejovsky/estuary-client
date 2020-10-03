@@ -80,7 +80,6 @@ const UserEdit = (props: Props) => {
   }
 
   const submitValues = (values: UserUpdateData) => {
-    console.log(values)
     updateUser(values, history);
   };
 

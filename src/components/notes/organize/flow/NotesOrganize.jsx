@@ -112,7 +112,6 @@ function NotesOrganize({
               color="primary"
               variant="contained"
               onClick={() => {
-                console.log("clicked!");
                 setTimerShow(true);
                 setProjectNewShow(false);
                 setNoteForProjectShow(false);

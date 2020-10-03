@@ -26,7 +26,6 @@ const NewPassword = (props: Props) => {
   let token = window.location.search.replace(/^([?]token=)/, "")
   const theme = useTheme();
   const { auth, newPassword, history } = props;
-  console.log(history)
   const [validEmail, setValidEmail] = useState(true);
   const [matchingPassword, setMatchingPassword] = useState(true);
 
@@ -55,7 +54,6 @@ const NewPassword = (props: Props) => {
   };
 
   const renderResponseMessage = (): JSX.Element => {
-    console.log(auth)
     let text: string = ""
     switch (auth) {
       case false:
