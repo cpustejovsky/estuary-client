@@ -6,7 +6,7 @@ type Action = {
   payload: any;
 };
 
-export default function (state = {}, action: Action) {
+export default function (state: INotesState = {}, action: Action) {
   const {
     CREATE_NOTE,
     FETCH_NOTES,

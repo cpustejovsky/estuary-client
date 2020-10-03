@@ -1,6 +1,7 @@
 import { getInstance } from "./index";
-import { LOG_IN, SIGN_UP, PASSWORD_RESET } from "./types.ts";
+import {Constants} from "./types.ts";
 
+const { LOG_IN, SIGN_UP, PASSWORD_RESET } = Constants
 export const login = (values, history) => async (dispatch) => {
   let instance = await getInstance();
   let response = await instance.post("/login", values);

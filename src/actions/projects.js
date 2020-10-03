@@ -1,12 +1,13 @@
 import axios from "axios";
-import {
+import { Constants } from "./types.ts";
+
+const {
   FETCH_COMPLETED_PROJECTS,
   FETCH_PROJECTS,
   CREATE_PROJECT,
   UPDATE_PROJECT,
   DELETE_PROJECT,
-} from "./types.ts";
-
+} = Constants;
 export const fetchProjects = () => async (dispatch) => {
   const response = await axios.get("/api/projects");
   dispatch({

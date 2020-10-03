@@ -1,10 +1,7 @@
 import axios from "axios";
-import {
-  FETCH_FREEWRITES,
-  CREATE_FREEWRITE,
+import { Constants } from "./types.ts";
 
-} from "./types.ts";
-
+const { CREATE_FREEWRITE, FETCH_FREEWRITES } = Constants;
 export const fetchFreeWrites = () => async (dispatch) => {
   const response = await axios.get("/api/free-writes");
   dispatch({

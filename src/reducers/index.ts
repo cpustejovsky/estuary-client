@@ -5,15 +5,21 @@ import userReducer from "./userReducer";
 import notesReducer from "./notesReducer";
 import projectsReducer from "./projectsReducer";
 import freeWritesReducer from "./freeWritesReducer";
-import {IAuthState, IUserState, IFreeWritesState, INotesState} from "../actions/types"
+import {
+  IAuthState,
+  IUserState,
+  IFreeWritesState,
+  INotesState,
+  IProjectState,
+} from "../actions/types";
 
 export interface IRootState {
-  auth: IAuthState,
-  user: IUserState,
-  freeWrites: IFreeWritesState,
-  notes: INotesState,
-  projects: IProjectState,
-  form: FormReducer,
+  auth: IAuthState;
+  user: IUserState;
+  freeWrites: IFreeWritesState;
+  notes: INotesState;
+  projects: IProjectState;
+  form: FormReducer;
 }
 
 //TODO: specify action payload types

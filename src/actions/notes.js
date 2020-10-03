@@ -1,12 +1,13 @@
 import axios from "axios";
-import {
+import { Constants } from "./types.ts";
+
+const {
   FETCH_NOTES,
   FETCH_NOTES_CATEGORY,
   CREATE_NOTE,
   DELETE_NOTE,
   UPDATE_NOTE,
-} from "./types.ts";
-
+} = Constants;
 export const fetchNotes = () => async (dispatch) => {
   const response = await axios.get("/api/notes");
   dispatch({
@@ -62,7 +63,10 @@ export const categorizeNote = (noteId, category) => async (dispatch) => {
 };
 
 export const linkNoteToProject = (noteId, projectId) => async (dispatch) => {
-  const response = await axios.patch("/api/notes/project", { noteId, projectId });
+  const response = await axios.patch("/api/notes/project", {
+    noteId,
+    projectId,
+  });
   dispatch({
     type: UPDATE_NOTE,
     payload: response.data,

@@ -1,8 +1,9 @@
 import axios from "axios";
 import { getInstance } from "./index";
 
-import { FETCH_USER, UPDATE_USER, DELETE_USER } from "./types.ts";
+import {Constants} from "./types.ts";
 
+const { FETCH_USER, UPDATE_USER, DELETE_USER } = Constants
 export const fetchUser = () => async (dispatch) => {
   const response = await axios.get("/api/user");
   dispatch({
