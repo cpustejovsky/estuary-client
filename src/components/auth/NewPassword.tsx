@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
-import { AppState } from "../../models/"
+import { AppState, NewPasswordData } from "../../models/"
 import { Formik } from "formik";
 import { Link } from "react-router-dom"
 import { Button, CardActions, TextField, useTheme } from "@material-ui/core/";
@@ -18,21 +18,10 @@ const connector = connect(mapState, mapDispatch)
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-type Props = PropsFromRedux & {
-  history: any
-}
-
-export type NewPasswordData = {
-  emailAddress: string,
-  password: string,
-  password2: string,
-  token: string
-}
-
-const NewPassword = (props: Props) => {
+const NewPassword = (props: PropsFromRedux) => {
   let token = window.location.search.replace(/^([?]token=)/, "")
   const theme = useTheme();
-  const { auth, newPassword, history } = props;
+  const { auth, newPassword } = props;
   const [validEmail, setValidEmail] = useState(true);
   const [matchingPassword, setMatchingPassword] = useState(true);
 

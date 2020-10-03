@@ -9,3 +9,4 @@ export interface AppState extends DefaultRootState {
 }
 
 export * from "./User"
+export * from "./Auth"

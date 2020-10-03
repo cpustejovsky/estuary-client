@@ -2,7 +2,7 @@ import { getInstance } from "./index";
 import { Constants } from "./types";
 import { LoginData } from "../components/auth/Login";
 import { SignUpData } from "../components/auth/Signup";
-import { NewPasswordData } from "../components/auth/NewPassword";
+import { NewPasswordData } from "../models";
 import { History } from "history";
 import { IRootState } from "../reducers";
 import { Action } from "redux";
