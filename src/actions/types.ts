@@ -1,23 +1,32 @@
 //AUTH
-export const SIGN_UP: string = "SIGN_UP";
-export const LOG_IN: string = "LOG_IN";
-export const PASSWORD_RESET: string = "PASSWORD_RESET";
-//USER
-export const FETCH_USER: string = "FETCH_USER";
-export const UPDATE_USER: string = "UPDATE_USER";
-export const DELETE_USER: string = "DELETE_USER";
-//FREE WRITES
-export const FETCH_FREEWRITES: string = "FETCH_FREEWRITES";
-export const CREATE_FREEWRITE: string = "CREATE_FREEWRITE";
-//NOTES
-export const FETCH_NOTES: string = "FETCH_NOTES";
-export const FETCH_NOTES_CATEGORY: string = "FETCH_NOTES_CATEGORY";
-export const CREATE_NOTE: string = "CREATE_NOTE";
-export const UPDATE_NOTE: string = "UPDATE_NOTE";
-export const DELETE_NOTE: string = "DELETE_NOTE";
-//PROJECTS
-export const FETCH_PROJECTS: string = "FETCH_PROJECTS";
-export const FETCH_COMPLETED_PROJECTS: string = "FETCH_COMPLETED_PROJECTS";
-export const CREATE_PROJECT: string = "CREATE_PROJECT";
-export const UPDATE_PROJECT: string = "UPDATE_PROJECT";
-export const DELETE_PROJECT: string = "DELETE_PROJECT";
+import { User } from "../models/User";
+export type IAuthState = string | boolean;
+export type IUserState = User;
+//TODO: update these state types with accurate typing
+export type IFreeWritesState = any;
+export type INotesState = any;
+export type IProjectState = any;
+export enum Constants {
+  SIGN_UP = "SIGN_UP",
+  LOG_IN = "LOG_IN",
+  PASSWORD_RESET = "PASSWORD_RESET",
+  //USER
+  FETCH_USER = "FETCH_USER",
+  UPDATE_USER = "UPDATE_USER",
+  DELETE_USER = "DELETE_USER",
+  //FREE WRITES
+  FETCH_FREEWRITES = "FETCH_FREEWRITES",
+  CREATE_FREEWRITE = "CREATE_FREEWRITE",
+  //NOTES
+  FETCH_NOTES = "FETCH_NOTES",
+  FETCH_NOTES_CATEGORY = "FETCH_NOTES_CATEGORY",
+  CREATE_NOTE = "CREATE_NOTE",
+  UPDATE_NOTE = "UPDATE_NOTE",
+  DELETE_NOTE = "DELETE_NOTE",
+  //PROJECTS
+  FETCH_PROJECTS = "FETCH_PROJECTS",
+  FETCH_COMPLETED_PROJECTS = "FETCH_COMPLETED_PROJECTS",
+  CREATE_PROJECT = "CREATE_PROJECT",
+  UPDATE_PROJECT = "UPDATE_PROJECT",
+  DELETE_PROJECT = "DELETE_PROJECT",
+}

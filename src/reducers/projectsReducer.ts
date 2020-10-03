@@ -1,10 +1,4 @@
-import {
-  FETCH_PROJECTS,
-  CREATE_PROJECT,
-  DELETE_PROJECT,
-  UPDATE_PROJECT,
-  FETCH_COMPLETED_PROJECTS,
-} from "../actions/types";
+import { Constants, IProjectState } from "../actions/types";
 import _ from "lodash";
 
 type Action = {
@@ -12,7 +6,14 @@ type Action = {
   payload: any;
 };
 
-export default function (state = {}, action: Action) {
+export default function (state: IProjectState = {}, action: Action) {
+  const {
+    FETCH_PROJECTS,
+    CREATE_PROJECT,
+    DELETE_PROJECT,
+    UPDATE_PROJECT,
+    FETCH_COMPLETED_PROJECTS,
+  } = Constants;
   switch (action.type) {
     //TODO: is this the best way to deal with projects? Maybe a case where hooks would be better?
     case FETCH_PROJECTS:

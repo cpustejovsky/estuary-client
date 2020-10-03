@@ -1,4 +1,4 @@
-import { CREATE_FREEWRITE, FETCH_FREEWRITES } from "../actions/types";
+import {Constants, IFreeWritesState} from "../actions/types";
 import _ from "lodash";
 
 type Action = {
@@ -6,7 +6,8 @@ type Action = {
   payload: any
 }
 
-export default function (state = {}, action: Action) {
+export default function (state: IFreeWritesState = {}, action: Action) {
+  const { CREATE_FREEWRITE, FETCH_FREEWRITES } = Constants;
   switch (action.type) {
     case FETCH_FREEWRITES:
       return { ...state, ..._.mapKeys(action.payload, "_id") } || false;

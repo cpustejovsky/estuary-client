@@ -1,10 +1,4 @@
-import {
-  CREATE_NOTE,
-  FETCH_NOTES,
-  DELETE_NOTE,
-  UPDATE_NOTE,
-  FETCH_NOTES_CATEGORY,
-} from "../actions/types";
+import { Constants, INotesState } from "../actions/types";
 import _ from "lodash";
 
 type Action = {
@@ -13,6 +7,13 @@ type Action = {
 };
 
 export default function (state = {}, action: Action) {
+  const {
+    CREATE_NOTE,
+    FETCH_NOTES,
+    DELETE_NOTE,
+    UPDATE_NOTE,
+    FETCH_NOTES_CATEGORY,
+  } = Constants;
   switch (action.type) {
     case FETCH_NOTES:
       return { ...state, ..._.mapKeys(action.payload, "_id") };
