@@ -4,6 +4,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { signUp } from "../../actions";
 import { Button, CardActions, TextField } from "@material-ui/core/";
 import emailValidator from "../../utils/emailvalidator";
+import { SignUpData } from "../../models/"
 
 
 const mapDispatch = {
@@ -16,14 +17,6 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 
 type Props = PropsFromRedux & {
   history: any
-}
-
-export type SignUpData = {
-  firstName: string,
-  lastName: string,
-  emailAddress: string,
-  password: string,
-  password2: string,
 }
 
 const SignUp = (props: Props) => {

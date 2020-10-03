@@ -3,6 +3,7 @@ import { Formik } from "formik";
 import { connect, ConnectedProps } from "react-redux";
 import { login } from "../../actions";
 import { Button, CardActions, TextField } from "@material-ui/core/";
+import { LoginData } from "../../models/"
 
 const mapDispatch = {
   login
@@ -16,14 +17,7 @@ type Props = PropsFromRedux & {
   history: any
 }
 
-export type LoginData = {
-  emailAddress: string,
-  password: string,
-}
-
 const Login = (props: Props) => {
-
-
 
   let loginData: LoginData = {
     emailAddress: "",
