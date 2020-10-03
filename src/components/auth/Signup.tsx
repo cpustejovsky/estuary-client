@@ -18,15 +18,15 @@ type Props = PropsFromRedux & {
   history: any
 }
 
-const SignUp = (props: Props) => {
+export type SignUpData = {
+  firstName: string,
+  lastName: string,
+  emailAddress: string,
+  password: string,
+  password2: string,
+}
 
-  type SignUpData = {
-    firstName: string,
-    lastName: string,
-    emailAddress: string,
-    password: string,
-    password2: string,
-  }
+const SignUp = (props: Props) => {
 
   let signupData: SignUpData = {
     firstName: "",

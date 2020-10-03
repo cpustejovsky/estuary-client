@@ -16,12 +16,14 @@ type Props = PropsFromRedux & {
   history: any
 }
 
+export type LoginData = {
+  emailAddress: string,
+  password: string,
+}
+
 const Login = (props: Props) => {
 
-  type LoginData = {
-    emailAddress: string,
-    password: string,
-  }
+
 
   let loginData: LoginData = {
     emailAddress: "",

@@ -22,6 +22,13 @@ type Props = PropsFromRedux & {
   history: any
 }
 
+export type NewPasswordData = {
+  emailAddress: string,
+  password: string,
+  password2: string,
+  token: string
+}
+
 const NewPassword = (props: Props) => {
   let token = window.location.search.replace(/^([?]token=)/, "")
   const theme = useTheme();
@@ -29,21 +36,14 @@ const NewPassword = (props: Props) => {
   const [validEmail, setValidEmail] = useState(true);
   const [matchingPassword, setMatchingPassword] = useState(true);
 
-  type NewPasswordValues = {
-    emailAddress: string,
-    password: string,
-    password2: string,
-    token: string
-  }
-
-  let newPasswordValues: NewPasswordValues = {
+  let newPasswordValues: NewPasswordData = {
     emailAddress: "",
     password: "",
     password2: "",
     token: token
   }
 
-  const submitValues = (values: NewPasswordValues) => {
+  const submitValues = (values: NewPasswordData) => {
     if (emailValidator(values.emailAddress)) {
       setValidEmail(false);
     } else if (values.password !== values.password2) {

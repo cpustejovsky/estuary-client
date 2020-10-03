@@ -15,6 +15,7 @@
     "@types/react-mailchimp-subscribe": "^2.1.0",
     "@types/react-router-dom": "^5.1.5",
     "@types/redux-form": "^8.3.0",
+    "@types/redux-thunk": "^2.1.0",
     "axios": "^0.19.2",
     "date-fns": "^2.16.1",
     "formik": "^2.1.4",
