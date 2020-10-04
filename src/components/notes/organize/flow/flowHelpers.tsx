@@ -1,15 +1,20 @@
 import React from "react";
 import Note from "../../Note";
+import {Note as NoteType} from "../../../../models"
+import {History} from "history"
 import _ from "lodash";
 
-export function mapInTrayArray(notes, history) {
+type Notes = NoteType[];
+
+
+export function mapInTrayArray(notes: Notes, history: History) {
   if (!_.isEmpty(notes)) {
     return notes
       .reverse()
-      .map(({ content, _id, tags, category }) => {
+      .map(({ content, id, tags, category }) => {
         if (category === "in-tray") {
           return {
-            id: _id,
+            id: id,
             history,
             content,
             tags,
@@ -23,12 +28,11 @@ export function mapInTrayArray(notes, history) {
   }
 }
 
-export function renderNote(noteArr) {
+export function renderNote(noteArr: Notes) {
   if (noteArr && !_.isEmpty(noteArr)) {
     return noteArr.map((note) => {
       if (note.category === "in-tray") {
-        return (
-          <Note
+        return (<Note
             key={note.id}
             history={note.history}
             id={note.id}
@@ -36,8 +40,7 @@ export function renderNote(noteArr) {
             tags={note.tags}
             category={note.category}
             organize={true}
-          />
-        );
+          />);
       } else {
         return null;
       }
