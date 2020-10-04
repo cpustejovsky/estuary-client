@@ -4,9 +4,8 @@ import { History } from "history";
 import { IRootState } from "../reducers";
 import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { User } from "../models";
-
 import { Constants } from "./types";
+import { UserUpdateData } from "../components/user/UserEdit";
 
 const { FETCH_USER, UPDATE_USER, DELETE_USER } = Constants;
 export const fetchUser = (): ThunkAction<
@@ -22,7 +21,7 @@ export const fetchUser = (): ThunkAction<
   });
 };
 export const updateUser = (
-  values: User,
+  values: UserUpdateData,
   history: History
 ): ThunkAction<void, IRootState, unknown, Action<string>> => async (
   dispatch

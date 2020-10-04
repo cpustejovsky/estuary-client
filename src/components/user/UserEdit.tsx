@@ -31,6 +31,13 @@ type Props = PropsFromRedux & {
   history: any
 }
 
+export type UserUpdateData = {
+  FirstName: string,
+  LastName: string,
+  EmailUpdates: boolean,
+  AdvancedView: boolean,
+}
+
 const UserEdit = (props: Props) => {
   const { history, updateUser, deleteUser } = props
   const user: User = props.user;
@@ -71,13 +78,6 @@ const UserEdit = (props: Props) => {
       return null;
     }
   };
-
-  type UserUpdateData = {
-    FirstName: string,
-    LastName: string,
-    EmailUpdates: boolean,
-    AdvancedView: boolean,
-  }
 
   const submitValues = (values: UserUpdateData) => {
     updateUser(values, history);
