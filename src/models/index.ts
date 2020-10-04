@@ -12,4 +12,5 @@ export interface AppState extends DefaultRootState {
 
 export * from "./Auth"
 export * from "./FreeWrites"
+export * from "./Note"
 export * from "./User"
