@@ -6,11 +6,22 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import reducers from "./reducers";
 import "./style.scss";
-import App from "./components/App.tsx";
+import App from "./components/App";
 
-ReactGA.initialize(process.env.REACT_APP_GA_KEY);
+interface CustomEnvVars extends NodeJS.ProcessEnv {
+  REACT_APP_GA_KEY: string
+}
+const customEnvVars = process.env as any as CustomEnvVars
+
+interface DevToolsWindow extends Window {
+  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: <R>(a: R) => R
+}
+
+const devToolsWindow = window as any as DevToolsWindow
+
+ReactGA.initialize(customEnvVars.REACT_APP_GA_KEY);
 ReactGA.pageview(window.location.pathname + window.location.search);
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = devToolsWindow.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
 ReactDOM.render(
