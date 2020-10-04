@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Constants } from "./types";
-import { History } from "history";
 import { IRootState } from "../reducers";
 import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
