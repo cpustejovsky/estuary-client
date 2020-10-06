@@ -11,14 +11,14 @@ export function mapInTrayArray(notes: Notes, history: History) {
   if (!_.isEmpty(notes)) {
     return notes
       .reverse()
-      .map(({ content, id, tags, category }) => {
-        if (category === "in-tray") {
+      .map(({ Content, ID, Tags, Category }) => {
+        if (Category === "in-tray") {
           return {
-            id: id,
+            id: ID,
             history,
-            content,
-            tags,
-            category,
+            Content,
+            Tags,
+            Category,
           };
         } else {
           return null;
@@ -31,15 +31,15 @@ export function mapInTrayArray(notes: Notes, history: History) {
 export function renderNote(noteArr: Notes) {
   if (noteArr && !_.isEmpty(noteArr)) {
     return noteArr.map((note) => {
-      if (note.category === "in-tray") {
+      if (note.Category === "in-tray") {
         return (<Note
-            key={note.id}
-            id={note.id}
-            content={note.content}
+            key={note.ID}
+            id={note.ID}
+            content={note.Content}
             // tags={note.tags}
-            category={note.category}
+            category={note.Category}
             organize={true}
-            completedDate={note.completedDate}
+            completedDate={note.CompletedDate}
           />);
       } else {
         return null;

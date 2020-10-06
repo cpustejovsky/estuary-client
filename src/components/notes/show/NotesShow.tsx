@@ -9,7 +9,6 @@ import renderSubHeader from "./renderSubheader";
 import { AppState } from "../../../models/"
 import { Note as NoteType } from "../../../models"
 import { Redirect } from "react-router-dom";
-import * as H from "history";
 
 const mapState = (state: AppState) => ({
   auth: state.auth,
@@ -25,16 +24,15 @@ const connector = connect(mapState, mapDispatch)
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 type Props = PropsFromRedux & {
-  history: H.History,
   match: any
 }
 
 
 function NotesShow(props: Props) {
-  const { fetchNotesByCategory, history, match, auth, user, notes } = props;
+  const { fetchNotesByCategory, match, auth, user, notes } = props;
   const getNotesLength = (notes: NoteType[]) => {
     return notes.length > 0
-      ? notes.filter((note: NoteType) => note.category === match.params.name).length
+      ? notes.filter((note: NoteType) => note.Category === match.params.name).length
       : 0;
   };
   const notesLength = getNotesLength(notes);
@@ -46,25 +44,24 @@ function NotesShow(props: Props) {
     if (!_.isEmpty(notes)) {
       return notes
         .reverse()
-        .map(({ content, id, category, completedDate }) => {
+        .map(({ Content, ID, Category, CompletedDate }) => {
           return (
             <Note
-              key={id}
-              id={id}
-              content={content}
-              category={category}
-              completedDate={completedDate}
+              key={ID}
+              id={ID}
+              content={Content}
+              category={Category}
+              completedDate={CompletedDate}
               organize={false}
             />
           );
         });
     }
   };
-  //TODO: what is a good way to deal with auth redirects?
+  console.log(notes)  
   if (auth || user) {
     return (
       <div>
-        {/* <NoteHeader /> */}
         <div className="site__note">
           {renderSubHeader(notes, match)}
           <hr />

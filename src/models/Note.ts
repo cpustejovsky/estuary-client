@@ -1,8 +1,8 @@
 export interface Note {
-  content: string
-  category: string
-  tags: string[]
+  Content: string
+  Category: string
+  Tags: string[]
   history: History
-  id: string
-  completedDate: Date
+  ID: string
+  CompletedDate: Date
 }

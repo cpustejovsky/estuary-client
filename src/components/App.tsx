@@ -87,7 +87,7 @@ const App = (props: PropsFromRedux): JSX.Element => {
               path="/notes/:name"
               exact
               render={(props) => (
-                <NotesShow history={props.history} match={props.match} />
+                <NotesShow match={props.match} />
               )}
             />
             <Route path="/user" exact component={UserShow} />

@@ -28,11 +28,11 @@ function Note(props: Props) {
   const toggleEdit = () => setEditShow(!editShow);
 
   const closeEditView = () => setEditShow(false);
-  const renderEdit = (id: string) => {
-    if (editShow && id === id) {
+  const renderEdit = (NoteId: string) => {
+    if (editShow && NoteId === id) {
       return (
         <NoteEdit
-          id={id}
+          id={NoteId}
           content={content}
           closeEditView={closeEditView}
         />
