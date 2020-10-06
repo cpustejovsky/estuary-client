@@ -19,7 +19,8 @@ export default function (state: INotesState = {}, action: Action) {
       return { ...state, ..._.mapKeys(action.payload, "_id") };
     //TODO: see if there's a better way to deal with note categories
     case FETCH_NOTES_CATEGORY:
-      return _.mapKeys(action.payload, "_id");
+      return action.payload
+    // return _.mapKeys(action.payload, "ID");
     case CREATE_NOTE:
       return { ...state, [action.payload._id]: action.payload };
     case UPDATE_NOTE:

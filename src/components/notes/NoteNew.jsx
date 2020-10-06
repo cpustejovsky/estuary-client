@@ -22,7 +22,7 @@ function NotesNew({ history, createNote }) {
           }, 400);
         }}
       >
-        {({ values, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+        {({ values, handleChange, handleBlur, handleSubmit }) => (
           <form
             onSubmit={handleSubmit}
             onKeyPress={(e) => {

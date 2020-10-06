@@ -4,6 +4,8 @@ import { IRootState } from "../reducers";
 import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { Note } from "../models";
+import { getInstance } from "./index";
+
 const {
   FETCH_NOTES,
   FETCH_NOTES_CATEGORY,
@@ -51,7 +53,8 @@ export const createNote = (
 ): ThunkAction<void, IRootState, unknown, Action<string>> => async (
   dispatch
 ) => {
-  const response = await axios.post("/api/notes", values);
+  const instance = await getInstance();
+  const response = await instance.post("/notes", values);
   dispatch({
     type: CREATE_NOTE,
     payload: response.data,

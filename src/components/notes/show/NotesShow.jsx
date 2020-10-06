@@ -24,16 +24,16 @@ function NotesShow({ fetchNotesByCategory, history, match }) {
     if (!_.isEmpty(notes)) {
       return notes
         .reverse()
-        .map(({ content, _id, tags, category, completedDate }) => {
+        .map(({ Content, ID, Category }) => {
           return (
             <Note
-              key={_id}
+              key={ID}
               history={history}
-              id={_id}
-              content={content}
-              tags={tags}
-              category={category}
-              completedDate={completedDate}
+              id={ID}
+              content={Content}
+              // tags={tags}
+              category={Category}
+              // completedDate={completedDate}
             />
           );
         });
