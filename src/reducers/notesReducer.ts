@@ -21,7 +21,7 @@ export default function (state: INotesState = {}, action: Action) {
     case FETCH_NOTES_CATEGORY:
       return _.mapKeys(action.payload, "ID");
     case CREATE_NOTE:
-      return { ...state, [action.payload._id]: action.payload };
+      return { ...state, [action.payload.ID]: action.payload };
     case UPDATE_NOTE:
       return { ...state, [action.payload._id]: action.payload };
     case DELETE_NOTE:

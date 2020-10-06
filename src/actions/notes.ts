@@ -3,7 +3,6 @@ import { Constants } from "./types";
 import { IRootState } from "../reducers";
 import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { Note } from "../models";
 import { getInstance } from "./index";
 
 const {

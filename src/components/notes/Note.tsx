@@ -43,12 +43,12 @@ function Note(props: Props) {
   };
 
   const toggleDelete = () => setDeleteShow(!deleteShow);
-  const renderDelete = (id: string) => {
-    if (deleteShow && id === id) {
+  const renderDelete = (NoteId: string) => {
+    if (deleteShow && NoteId === id) {
       return (
         <NoteDelete
           style={{ marginRight: "20px" }}
-          id={id}
+          id={NoteId}
           toggleDelete={toggleDelete}
         />
       );

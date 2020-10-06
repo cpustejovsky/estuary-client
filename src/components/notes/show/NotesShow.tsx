@@ -58,7 +58,6 @@ function NotesShow(props: Props) {
         });
     }
   };
-  console.log(notes)  
   if (auth || user) {
     return (
       <div>
