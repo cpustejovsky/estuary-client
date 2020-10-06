@@ -48,8 +48,12 @@ export const fetchNotesByCategory = (
   });
 };
 
+export type NewNote = {
+  content: string
+}
+
 export const createNote = (
-  values: Note
+  values: NewNote
 ): ThunkAction<void, IRootState, unknown, Action<string>> => async (
   dispatch
 ) => {

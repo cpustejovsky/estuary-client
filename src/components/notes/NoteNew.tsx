@@ -1,13 +1,25 @@
 import React from "react";
 import { Formik } from "formik";
-import { connect } from "react-redux";
-import { createNote } from "../../actions";
+import { connect, ConnectedProps } from "react-redux";
+import { NewNote, createNote } from "../../actions";
 import { TextareaAutosize, Button } from "@material-ui/core";
 
-function NotesNew({ history, createNote }) {
-  const submitValues = (values) => {
+
+const mapDispatch = {
+  createNote
+}
+
+const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux
+
+function NotesNew(props: Props) {
+  const { createNote } = props;
+  const submitValues = (values: NewNote) => {
     if (values.content.length > 0) {
-      createNote(values, history);
+      createNote(values);
     }
   };
   return (
@@ -33,7 +45,7 @@ function NotesNew({ history, createNote }) {
             }}
             className="notes"
           >
-            <div className="input-field center" style={{ display: "flex"}}>
+            <div className="input-field center" style={{ display: "flex" }}>
               <TextareaAutosize
                 aria-label="minimum height"
                 rowsMin={3}
@@ -50,7 +62,7 @@ function NotesNew({ history, createNote }) {
               size="small"
               variant="contained"
               color="primary"
-              style={{borderRadius: "0px 0px 10px 10px"}}
+              style={{ borderRadius: "0px 0px 10px 10px" }}
               onClick={() => {
                 handleSubmit();
               }}
@@ -64,4 +76,4 @@ function NotesNew({ history, createNote }) {
   );
 }
 
-export default connect(null, { createNote })(NotesNew);
+export default connector(NotesNew);

@@ -18,6 +18,11 @@ export {
   categorizeNote,
   linkNoteToProject,
 } from "./notes";
+
+export type {
+  NewNote,
+} from "./notes"
+
 export {
   fetchProjects,
   fetchCompleteProjects,
