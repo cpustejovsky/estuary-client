@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { connect, ConnectedProps } from "react-redux";
 import { fetchUser } from "../actions";
+import { Box, CssBaseline } from "@material-ui/core"
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles"
+import { User, AppState } from "../models/."
+//Components and Pages
 import history from "../history";
 import Header from "./partials/Header";
 import Login from "./auth/Login";
@@ -21,11 +25,44 @@ import ProjectShow from "./projects/ProjectShow";
 import ProjectsShow from "./projects/ProjectsShow";
 import ProjectNew from "./projects/ProjectNew";
 import Timer from "./notes/organize/Timer";
-import { User, AppState } from "../models/."
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles"
+
+
+// body: {
+//   backgroundColor: "#dcdcdc",
+//   fontFamily: "Roboto",
+//   "& @media screen and (max-width: 450px)": {
+//     overflowX: "hidden",
+//   },
+//   display: "flex",
+//   justifyContent: "center",
+//   margin: 0,
+// },
+// textarea: {
+//   backgroundColor: "white",
+//   fontFamily: "inherit",
+//   fontSize: "inherit",
+// },
+
+const roboto = {
+  fontFamily: 'Roboto'
+}
 
 const theme = createMuiTheme({
+  
+  typography: {
+    fontFamily: 'Roboto'
+  },
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        '@font-face': [roboto],
+      },
+    },
+  },
   palette: {
+    background: {
+      default: "#dcdcdc"
+    },
     primary: {
       light: '#757ce8',
       main: '#3f50b5',
@@ -68,8 +105,9 @@ const App = (props: PropsFromRedux): JSX.Element => {
   return (
     <Router history={history}>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Header user={user} />
-        <div className="site">
+        <Box m={0} display="flex" flexDirection="column" alignItems="center" maxWidth="100vw">
           <Switch>
             <Route path="/" exact component={Landing} />
             <Route path="/test" exact component={Test} />
@@ -113,7 +151,7 @@ const App = (props: PropsFromRedux): JSX.Element => {
             />
             <Route path="/projects/show/:id" exact component={ProjectShow} />
           </Switch>
-        </div>
+        </Box>
       </ThemeProvider>
     </Router>
   );
