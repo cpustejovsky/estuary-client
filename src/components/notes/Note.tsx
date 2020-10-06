@@ -1,22 +1,39 @@
 import React, { useState } from "react";
 import NoteDelete from "./NoteDelete";
 import NoteEdit from "./NoteEdit";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { categorizeNote } from "../../actions";
 import { Button, Card, CardContent, CardActions } from "@material-ui/core";
 
-function Note(props) {
-  const [deleteShow, setDeleteShow] = useState(false);
-  const [editShow, setEditShow] = useState(false);
+const mapDispatch = {
+  categorizeNote,
+}
+
+const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux & {
+  id: string,
+  content: string,
+  organize: boolean,
+  category: string,
+  completedDate: Date,
+}
+
+function Note(props: Props) {
+  const { categorizeNote, id, content, organize, category, completedDate } = props;
+  const [deleteShow, setDeleteShow] = useState<boolean>(false);
+  const [editShow, setEditShow] = useState<boolean>(false);
   const toggleEdit = () => setEditShow(!editShow);
 
   const closeEditView = () => setEditShow(false);
-  const renderEdit = (editShow, id) => {
-    if (editShow && id === props.id) {
+  const renderEdit = (id: string) => {
+    if (editShow && id === id) {
       return (
         <NoteEdit
-          id={props.id}
-          content={props.content}
+          id={id}
+          content={content}
           closeEditView={closeEditView}
         />
       );
@@ -26,12 +43,12 @@ function Note(props) {
   };
 
   const toggleDelete = () => setDeleteShow(!deleteShow);
-  const renderDelete = (deleteShow, id) => {
-    if (deleteShow && id === props.id) {
+  const renderDelete = (id: string) => {
+    if (deleteShow && id === id) {
       return (
         <NoteDelete
           style={{ marginRight: "20px" }}
-          id={props.id}
+          id={id}
           toggleDelete={toggleDelete}
         />
       );
@@ -40,14 +57,14 @@ function Note(props) {
     }
   };
   const renderButtons = () => {
-    if (props.organize) return null;
-    switch (props.category) {
+    if (organize) return null;
+    switch (category) {
       case "maybe" || "referense":
         return (
           <>
             <Button
               onClick={() => {
-                props.categorizeNote(props.id, "in-tray");
+                categorizeNote(id, "in-tray");
               }}
               className="click"
             >
@@ -65,8 +82,8 @@ function Note(props) {
         return (
           <p>
             Completed on:{" "}
-            {props.completedDate
-              ? new Date(props.completedDate).toLocaleString()
+            {completedDate
+              ? new Date(completedDate).toLocaleString()
               : "N/A"}
           </p>
         );
@@ -75,7 +92,7 @@ function Note(props) {
           <>
             <Button
               onClick={() => {
-                props.categorizeNote(props.id, "done");
+                categorizeNote(id, "done");
               }}
             >
               Complete
@@ -89,15 +106,15 @@ function Note(props) {
     }
   };
   return (
-    <Card raised key={props.id} className="margin-top notes">
+    <Card raised key={id} className="margin-top notes">
       <CardContent>
-        <p>{!editShow ? props.content : null}</p>
-        {renderEdit(editShow, props.id)}
+        <p>{!editShow ? content : null}</p>
+        {renderEdit(id)}
       </CardContent>
       <CardActions>{renderButtons()}</CardActions>
-      {renderDelete(deleteShow, props.id)}
+      {renderDelete(id)}
     </Card>
   );
 }
 
-export default connect(null, { categorizeNote })(Note);
+export default connector(Note);
