@@ -4,4 +4,5 @@ export interface Note {
   tags: string[]
   history: History
   id: string
+  completedDate: Date
 }
