@@ -6,7 +6,7 @@ import Tab from "@material-ui/core/Tab";
 export default function NoteHeader() {
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
 
