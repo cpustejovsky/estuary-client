@@ -34,12 +34,12 @@ export function renderNote(noteArr: Notes) {
       if (note.category === "in-tray") {
         return (<Note
             key={note.id}
-            history={note.history}
             id={note.id}
             content={note.content}
-            tags={note.tags}
+            // tags={note.tags}
             category={note.category}
             organize={true}
+            completedDate={note.completedDate}
           />);
       } else {
         return null;

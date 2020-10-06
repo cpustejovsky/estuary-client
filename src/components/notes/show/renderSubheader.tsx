@@ -2,13 +2,10 @@ import React from "react";
 import { Button, Typography } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import _ from "lodash";
+import { Note } from "../../../models";
 
-export default function renderSubHeader(notes, match) {
-  const renderNotesLength = () => {
-    if (!_.isEmpty(notes)) {
-      return notes.length;
-    }
-  };
+export default function renderSubHeader(notes: Note[], match: any) {
+  const renderNotesLength = () => !_.isEmpty(notes) ? notes.length : 0
   if (renderNotesLength() > 0) {
     return (
       <div className="button button__notes">
