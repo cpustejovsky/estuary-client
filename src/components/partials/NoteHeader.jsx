@@ -17,7 +17,7 @@ export default function NoteHeader() {
         variant="scrollable"
         scrollButtons="on"
         indicatorColor="secondary"
-        textColor="default"
+        textColor="secondary"
         aria-label="scrollable force tabs example"
         style={{ alignSelf: "center" }}
       >
