@@ -88,7 +88,9 @@ export const deleteNote = (
 ): ThunkAction<void, IRootState, unknown, Action<string>> => async (
   dispatch
 ) => {
-  await axios.delete("/api/notes", { data: { noteId: noteId } });
+  //TODO: wrap all my await statements in try-catch
+  const instance = await getInstance();
+  await instance.delete(`/notes/${noteId}`);
   dispatch({
     type: DELETE_NOTE,
     payload: noteId,
