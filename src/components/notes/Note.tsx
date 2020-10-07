@@ -47,7 +47,6 @@ function Note(props: Props) {
     if (deleteShow && NoteId === id) {
       return (
         <NoteDelete
-          style={{ marginRight: "20px" }}
           id={NoteId}
           toggleDelete={toggleDelete}
         />

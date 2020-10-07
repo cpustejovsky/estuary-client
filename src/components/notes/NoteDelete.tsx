@@ -1,12 +1,26 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { deleteNote } from "../../actions";
-import { Button, CardActions } from "@material-ui/core";
+import { Box, Button, CardActions } from "@material-ui/core";
 import { green, red, grey } from "@material-ui/core/colors";
 
-function NoteDelete(props) {
+
+const mapDispatch = {
+  deleteNote
+}
+
+const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux & {
+  id: string,
+  toggleDelete: () => void
+}
+
+function NoteDelete(props: Props) {
   return (
-    <>
+    <Box style={{ marginRight: "20px" }}>
       <CardActions>
         <Button disabled style={{ color: grey[500] }}>
           Are you sure?
@@ -31,8 +45,8 @@ function NoteDelete(props) {
           No
         </Button>
       </CardActions>
-    </>
+    </Box>
   );
 }
 
-export default connect(null, { deleteNote })(NoteDelete);
+export default connector(NoteDelete);

@@ -3,18 +3,12 @@ import { Formik } from "formik";
 import { connect, ConnectedProps } from "react-redux";
 import { updateNote } from "../../actions";
 import { Button, TextareaAutosize } from "@material-ui/core";
-import { AppState } from "../../models/"
 
-const mapState = (state: AppState) => ({
-  auth: state.auth,
-  user: state.user,
-  projects: Object.values(state.projects)
-})
 const mapDispatch = {
   updateNote
 }
 
-const connector = connect(mapState, mapDispatch)
+const connector = connect(null, mapDispatch)
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
