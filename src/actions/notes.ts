@@ -48,8 +48,8 @@ export const fetchNotesByCategory = (
 };
 
 export type NewNote = {
-  content: string
-}
+  content: string;
+};
 
 export const createNote = (
   values: NewNote
@@ -64,13 +64,19 @@ export const createNote = (
   });
 };
 
+export type UpdatedNotee = {
+  ID: string;
+  Content: string;
+};
+
 export const updateNote = (
-  noteId: string,
-  content: string
+  id: string,
+  values: { Content: string }
 ): ThunkAction<void, IRootState, unknown, Action<string>> => async (
   dispatch
 ) => {
-  const response = await axios.patch("/api/notes", { noteId, content });
+  const instance = await getInstance();
+  const response = await instance.patch(`/notes/${id}`, values);
   dispatch({
     type: UPDATE_NOTE,
     payload: response.data,

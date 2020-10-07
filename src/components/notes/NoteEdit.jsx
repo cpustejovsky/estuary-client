@@ -6,13 +6,13 @@ import { Button, TextareaAutosize } from "@material-ui/core";
 
 function NoteEdit(props) {
   const submitValues = (values) => {
-    props.updateNote(props.id, values.content);
+    props.updateNote(props.id, values);
     props.closeEditView();
   };
 
   return (
     <Formik
-      initialValues={{ content: props.content }}
+      initialValues={{ Content: props.content }}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           submitValues(values);
@@ -26,10 +26,10 @@ function NoteEdit(props) {
             {" "}
             <TextareaAutosize
               className="textarea textarea__notes"
-              name="content"
+              name="Content"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.content}
+              value={values.Content}
             ></TextareaAutosize>
             <Button type="submit" disabled={isSubmitting}>
               Update
