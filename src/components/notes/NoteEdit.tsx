@@ -1,18 +1,38 @@
 import React, { } from "react";
 import { Formik } from "formik";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { updateNote } from "../../actions";
 import { Button, TextareaAutosize } from "@material-ui/core";
+import { AppState } from "../../models/"
 
-function NoteEdit(props) {
-  const submitValues = (values) => {
-    props.updateNote(props.id, values);
-    props.closeEditView();
+const mapState = (state: AppState) => ({
+  auth: state.auth,
+  user: state.user,
+  projects: Object.values(state.projects)
+})
+const mapDispatch = {
+  updateNote
+}
+
+const connector = connect(mapState, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux & {
+  id: string,
+  content: string,
+  closeEditView: () => void
+}
+function NoteEdit(props: Props) {
+  const {id, content, closeEditView, updateNote} = props
+  const submitValues = (values: {Content: string}) => {
+    updateNote(id, values);
+    closeEditView();
   };
 
   return (
     <Formik
-      initialValues={{ Content: props.content }}
+      initialValues={{ Content: content }}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           submitValues(values);
@@ -41,4 +61,4 @@ function NoteEdit(props) {
   );
 }
 
-export default connect(null, { updateNote })(NoteEdit);
+export default connector(NoteEdit);
