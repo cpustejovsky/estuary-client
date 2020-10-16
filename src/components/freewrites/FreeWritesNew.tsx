@@ -1,7 +1,8 @@
 import React from "react";
 import { Formik } from "formik";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { createFreeWrite } from "../../actions";
+import { FreeWrite } from "../../models"
 import {
   FormControl,
   Button,
@@ -10,8 +11,22 @@ import {
   Typography,
 } from "@material-ui/core";
 
-function FreeWritesNew({history, createFreeWrite}) {
-  const submitValues = (values) => {
+const mapDispatch = {
+  createFreeWrite
+}
+
+const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux & {
+  history: any
+}
+
+
+function FreeWritesNew(props: Props) {
+  const {createFreeWrite, history} = props;
+  const submitValues = (values: FreeWrite) => {
     createFreeWrite(values, history);
   };
   return (
@@ -44,17 +59,16 @@ function FreeWritesNew({history, createFreeWrite}) {
         }}
       >
         {({ values, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
-          <FormControl fullWidth onSubmit={handleSubmit}>
+          <FormControl fullWidth>
             <div className="button button__free-writes">
               <Typography variant="h4" className="button__text__left">
                 Create New Free Write
               </Typography>
               <Button
-                type="submit"
                 size="large"
                 variant="contained"
                 color="primary"
-                onClick={handleSubmit}
+                // onClick={handleSubmit}
                 disabled={isSubmitting}
               >
                 Save
@@ -71,7 +85,6 @@ function FreeWritesNew({history, createFreeWrite}) {
               className="form"
             />
             <TextareaAutosize
-              fullWidth
               aria-label="minimum height"
               rowsMin={25}
               className="textarea__freewrites"
