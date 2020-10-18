@@ -53,6 +53,7 @@ function NotesShow(props: Props) {
               category={Category}
               completedDate={CompletedDate}
               organize={false}
+              project={false}
             />
           );
         });

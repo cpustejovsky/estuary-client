@@ -52,6 +52,7 @@ function ProjectShow(props: Props) {
           id={project._id}
           notes={notes}
           history={history}
+          complete={project.completed}
         />
       </div>
     );

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { deleteProject } from "../../actions";
-import { Button, CardActions } from "@material-ui/core";
+import { Box, Button, CardActions } from "@material-ui/core";
 import { green, red, grey } from "@material-ui/core/colors";
 
 const mapDispatch = {
@@ -20,7 +20,7 @@ type Props = PropsFromRedux & {
 
 function ProjectDelete(props: Props) {
   return (
-    <>
+    <Box style={{ marginRight: "20px" }}    >
       <CardActions>
         <Button disabled style={{ color: grey[500] }}>
           Are you sure?
@@ -45,7 +45,7 @@ function ProjectDelete(props: Props) {
           No
         </Button>
       </CardActions>
-    </>
+    </Box>
   );
 }
 

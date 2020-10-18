@@ -36,10 +36,11 @@ export function renderNote(noteArr: Notes) {
             key={note.ID}
             id={note.ID}
             content={note.Content}
-            // tags={note.tags}
+            // tags={note.Tags}
             category={note.Category}
             organize={true}
             completedDate={note.CompletedDate}
+            project={false}
           />);
       } else {
         return null;

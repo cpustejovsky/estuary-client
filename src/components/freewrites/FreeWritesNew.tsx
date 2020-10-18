@@ -50,6 +50,7 @@ function FreeWritesNew(props: Props) {
         initialValues={{
           title: new Date().toLocaleDateString(),
           content: "",
+          id: null
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {

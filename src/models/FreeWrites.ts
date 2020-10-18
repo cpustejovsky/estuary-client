@@ -1,5 +1,5 @@
 export interface FreeWrite {
-  id: string;
+  id: string | null;
   title: string;
   content: string;
 }

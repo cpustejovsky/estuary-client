@@ -68,7 +68,6 @@ function Project(props: Props) {
       return (
         <ProjectDelete
           history={props.history}
-          style={{ marginRight: "20px" }}
           id={props.id}
           toggleDelete={toggleDelete}
         />
