@@ -44,15 +44,15 @@ const connector = connect(mapState, mapDispatch)
 
 
 export type Toggle = {
-  Advanced: ()=> void;
-  Actionable: ()=> void;
-  NotActionable: ()=> void;
-  TwoMinutes: ()=> void;
-  Timer: ()=> void;
-  NextAction: ()=> void;
-  ProjectNew: ()=> void;
-  NoteForProject: ()=> void;
-  Calendar: ()=> void;
+  Advanced: () => void;
+  Actionable: () => void;
+  NotActionable: () => void;
+  TwoMinutes: () => void;
+  Timer: () => void;
+  NextAction: () => void;
+  ProjectNew: () => void;
+  NoteForProject: () => void;
+  Calendar: () => void;
 }
 
 type PropsFromRedux = ConnectedProps<typeof connector>
@@ -63,7 +63,7 @@ type Props = PropsFromRedux & {
 }
 
 
-const NotesOrganize =(props: Props) => {
+const NotesOrganize = (props: Props) => {
   const {
     fetchNotesByCategory,
     fetchProjects,
@@ -83,9 +83,9 @@ const NotesOrganize =(props: Props) => {
   const inTrayArray = mapInTrayArray(notes, history);
   let note =
     inTrayArray && inTrayArray[0] !== undefined ? inTrayArray[0] : null;
-  let noteId = note && note !== null ? note.id : null;
+  let noteId: string = note && note !== null ? note.ID : "";
 
-  const [advanced, setAdvanced] = useState<boolean | null>(null);
+  const [advanced, setAdvanced] = useState<boolean>(false);
   const [actionableShow, setActionableShow] = useState(true);
   const [notActionableShow, setNotActionableShow] = useState(false);
   const [twoMinutesShow, setTwoMinutesShow] = useState(false);
@@ -145,8 +145,8 @@ const NotesOrganize =(props: Props) => {
               color="primary"
               variant="contained"
               onClick={() => {
-                if(note && note.id) {
-                  categorizeNote(note.id, "next")
+                if (note && note.ID) {
+                  categorizeNote(note.ID, "next")
                 }
               }}
             >
@@ -189,8 +189,8 @@ const NotesOrganize =(props: Props) => {
               color="primary"
               variant="contained"
               onClick={() => {
-                if(note && note.id) {
-                  categorizeNote(note.id, "waiting")
+                if (note && note.ID) {
+                  categorizeNote(note.ID, "waiting")
                 }
               }}            >
               Waiting
@@ -199,8 +199,8 @@ const NotesOrganize =(props: Props) => {
               color="primary"
               variant="contained"
               onClick={() => {
-                if(note && note.id) {
-                  categorizeNote(note.id, "reference")
+                if (note && note.ID) {
+                  categorizeNote(note.ID, "reference")
                 }
               }}            >
               Reference
@@ -209,8 +209,8 @@ const NotesOrganize =(props: Props) => {
               color="primary"
               variant="contained"
               onClick={() => {
-                if(note && note.id) {
-                  deleteNote(note.id)
+                if (note && note.ID) {
+                  deleteNote(note.ID)
                 }
               }}            >
               Trash
@@ -293,7 +293,7 @@ const NotesOrganize =(props: Props) => {
       return (
         <Grid
           justify="center"
-          align="center"
+          alignContent="center"
           style={{
             backgroundColor: "white",
             borderRadius: "10px",
@@ -315,7 +315,7 @@ const NotesOrganize =(props: Props) => {
               <Switch
                 size="small"
                 color="primary"
-                checked={advanced === null ? user.advancedView : advanced}
+                checked={user.AdvancedView === true ? Boolean(user.advancedView) : advanced}
                 onChange={() => {
                   toggle.Advanced();
                   setProjectNewShow(false);
