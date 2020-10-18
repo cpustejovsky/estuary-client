@@ -42,6 +42,19 @@ const mapDispatch = {
 
 const connector = connect(mapState, mapDispatch)
 
+
+export type Toggle = {
+  Advanced: ()=> void;
+  Actionable: ()=> void;
+  NotActionable: ()=> void;
+  TwoMinutes: ()=> void;
+  Timer: ()=> void;
+  NextAction: ()=> void;
+  ProjectNew: ()=> void;
+  NoteForProject: ()=> void;
+  Calendar: ()=> void;
+}
+
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 type Props = PropsFromRedux & {
@@ -50,7 +63,7 @@ type Props = PropsFromRedux & {
 }
 
 
-function NotesOrganize(props: Props) {
+const NotesOrganize =(props: Props) => {
   const {
     fetchNotesByCategory,
     fetchProjects,
@@ -82,7 +95,7 @@ function NotesOrganize(props: Props) {
   const [noteForProjectShow, setNoteForProjectShow] = useState(false);
   const [calendarShow, setCalendarShow] = useState(false);
 
-  const toggle = {
+  const toggle: Toggle = {
     Advanced() {
       if (advanced === null) {
         setAdvanced(!user.AdvancedView);

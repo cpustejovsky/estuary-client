@@ -1,7 +1,14 @@
 import React from "react";
 import { Button } from "@material-ui/core";
+import {Toggle} from "./flow/NotesOrganize"
 
-export default function Actionable({ show, toggle }) {
+type Props = {
+  show: boolean,
+  toggle: Toggle
+}
+
+export default function Actionable(props: Props) {
+  const { show, toggle } = props
   if (show) {
     return (
       <>
