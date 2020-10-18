@@ -18,7 +18,8 @@ type Props = PropsFromRedux & {
   content: string,
   organize: boolean,
   category: string,
-  completedDate: Date,
+  completedDate: Date | null,
+  project: boolean
 }
 
 function Note(props: Props) {

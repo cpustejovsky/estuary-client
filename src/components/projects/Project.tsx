@@ -1,15 +1,34 @@
 import React, { useState } from "react";
 import ProjectDelete from "./ProjectDelete";
 import ProjectNew from "./ProjectNew";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { completeProject } from "../../actions";
 import Note from "../notes/Note";
 // import { categorizeNote } from "../../actions";
 import { Button, Card, CardContent, CardActions } from "@material-ui/core";
+import { AppState } from "../../models/"
 
-function Project(props) {
-  const [deleteShow, setDeleteShow] = useState(false);
-  const [editShow, setEditShow] = useState(false);
+const mapDispatch = {
+  completeProject
+}
+
+const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux & {
+  id: string,
+  title: string,
+  description: string,
+  dueDate: Date,
+  history: any,
+  complete: boolean,
+  notes: AppState["notes"]
+}
+
+function Project(props: Props) {
+  const [deleteShow, setDeleteShow] = useState<boolean>(false);
+  const [editShow, setEditShow] = useState<boolean>(false);
 
   const toggleEdit = () => {
     setEditShow(!editShow);
@@ -18,7 +37,7 @@ function Project(props) {
 
   const closeEditView = () => setEditShow(false);
   const closeDeleteView = () => setDeleteShow(false);
-  const renderEdit = (editShow, id) => {
+  const renderEdit = (editShow: boolean, id: string) => {
     if (editShow) {
       const project = {
         title: props.title,
@@ -44,7 +63,7 @@ function Project(props) {
     closeEditView();
   };
 
-  const renderDelete = (deleteShow, id) => {
+  const renderDelete = (deleteShow: boolean, id: string) => {
     if (deleteShow && id === props.id) {
       return (
         <ProjectDelete
@@ -86,10 +105,12 @@ function Project(props) {
     return props.notes.map((note) => {
       return (
         <Note
-          category={note.category}
-          content={note.content}
-          noteId={note._id}
-          project
+          category={note.Category}
+          content={note.Content}
+          id={note.ID}
+          project={true}
+          organize={false}
+          completedDate={null}
         />
       );
     });
@@ -123,4 +144,4 @@ function Project(props) {
   );
 }
 
-export default connect(null, { completeProject })(Project);
+export default connector(Project);
