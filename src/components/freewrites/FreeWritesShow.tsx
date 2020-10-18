@@ -1,24 +1,43 @@
 import React, { useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { connect, useSelector } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { fetchFreeWrites } from "../../actions";
-import Loader from "../partials/Loader.tsx";
+import Loader from "../partials/Loader";
 import { Fab, Card, CardContent, Typography } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import _ from "lodash";
+import { AppState } from "../../models/"
 
-function FreeWriteShow({ fetchFreeWrites, history }) {
-  const auth = useSelector((state) => state.auth);
-  const user = useSelector((state) => state.user);
-  const freeWrites = useSelector((state) => Object.values(state.freeWrites));
+const mapState = (state: AppState) => ({
+  auth: state.auth,
+  user: state.user,
+  freeWrites: Object.values(state.freeWrites)
+
+})
+
+const mapDispatch = {
+  fetchFreeWrites
+}
+
+const connector = connect(mapState, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux & {
+  history: any,
+  match: any
+}
+
+function FreeWriteShow(props: Props) {
+  const { auth, user, freeWrites, fetchFreeWrites, history } = props
   useEffect(() => {
     fetchFreeWrites();
   }, [fetchFreeWrites]);
   const renderFreeWrites = () => {
     if (!_.isEmpty(freeWrites)) {
-      return freeWrites.map(({ content, _id, title }) => {
+      return freeWrites.map(({ content, id, title }) => {
         return (
-          <Card key={_id} raised className="margin-top freewrites">
+          <Card key={id} raised className="margin-top freewrites">
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                 {title}
@@ -53,11 +72,13 @@ function FreeWriteShow({ fetchFreeWrites, history }) {
         {renderFreeWrites()}
       </div>
     );
-  } else if (auth === null && user === null) {
-    return <Loader />;
-  } else if (!auth && !auth) {
+  }
+  else if (!auth && !auth) {
     return <>{history.push("/login")}</>;
+  }
+  else {
+    return <Loader />;
   }
 }
 
-export default connect(null, { fetchFreeWrites })(FreeWriteShow);
+export default connector(FreeWriteShow);
