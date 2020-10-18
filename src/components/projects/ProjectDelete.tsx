@@ -1,10 +1,24 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { deleteProject } from "../../actions";
 import { Button, CardActions } from "@material-ui/core";
 import { green, red, grey } from "@material-ui/core/colors";
 
-function ProjectDelete(props) {
+const mapDispatch = {
+  deleteProject
+}
+
+const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux & {
+  toggleDelete: () => void,
+  history: any,
+  id: string
+}
+
+function ProjectDelete(props: Props) {
   return (
     <>
       <CardActions>
@@ -35,4 +49,4 @@ function ProjectDelete(props) {
   );
 }
 
-export default connect(null, { deleteProject })(ProjectDelete);
+export default connector(ProjectDelete);
