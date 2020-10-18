@@ -1,6 +1,13 @@
 import React from "react";
 import { Button } from "@material-ui/core";
-export default function TwoMinutes({ show, toggle }) {
+
+type Props = {
+  show: boolean,
+  toggle: any
+}
+
+export default function TwoMinutes(props: Props) {
+  const { show, toggle } = props
   if (show) {
     return (
       <>

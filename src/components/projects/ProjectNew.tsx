@@ -38,6 +38,7 @@ type Props = PropsFromRedux & {
   toggleProjectNew?: any,
   toggleActionable?: any,
   toggleEdit?: any,
+  toggle: any
 }
 
 

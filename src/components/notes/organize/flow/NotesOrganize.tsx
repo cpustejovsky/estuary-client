@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { connect, useSelector } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import {
   fetchNotesByCategory,
@@ -8,7 +8,7 @@ import {
   fetchProjects,
 } from "../../../../actions";
 import { mapInTrayArray, renderNote } from "./flowHelpers";
-import Loader from "../../../partials/Loader.tsx";
+import Loader from "../../../partials/Loader";
 import Actionable from "../Actionable";
 import NotActionable from "../NotActionable";
 import TwoMinutes from "../TwoMinutes";
@@ -25,16 +25,43 @@ import {
   Button,
 } from "@material-ui/core";
 
-function NotesOrganize({
+
+import { AppState } from "../../../../models/"
+
+const mapState = (state: AppState) => ({
+  notes: Object.values(state.notes),
+  projects: Object.values(state.projects),
+  user: state.user
+})
+const mapDispatch = {
   fetchNotesByCategory,
-  fetchProjects,
-  deleteNote,
   categorizeNote,
-  history,
-}) {
-  const user = useSelector((state) => state.user);
-  const notes = useSelector((state) => Object.values(state.notes));
-  const projects = useSelector((state) => Object.values(state.projects));
+  deleteNote,
+  fetchProjects,
+}
+
+const connector = connect(mapState, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux & {
+  history: any
+
+}
+
+
+function NotesOrganize(props: Props) {
+  const {
+    fetchNotesByCategory,
+    fetchProjects,
+    deleteNote,
+    categorizeNote,
+    history,
+    notes,
+    projects,
+    user
+  } = props
+
   useEffect(() => {
     fetchNotesByCategory("in-tray");
     fetchProjects();
@@ -45,7 +72,7 @@ function NotesOrganize({
     inTrayArray && inTrayArray[0] !== undefined ? inTrayArray[0] : null;
   let noteId = note && note !== null ? note.id : null;
 
-  const [advanced, setAdvanced] = useState(null);
+  const [advanced, setAdvanced] = useState<boolean | null>(null);
   const [actionableShow, setActionableShow] = useState(true);
   const [notActionableShow, setNotActionableShow] = useState(false);
   const [twoMinutesShow, setTwoMinutesShow] = useState(false);
@@ -58,7 +85,7 @@ function NotesOrganize({
   const toggle = {
     Advanced() {
       if (advanced === null) {
-        setAdvanced(!user.advancedView);
+        setAdvanced(!user.AdvancedView);
       } else {
         setAdvanced(!advanced);
       }
@@ -104,7 +131,11 @@ function NotesOrganize({
             <Button
               color="primary"
               variant="contained"
-              onClick={() => categorizeNote(note.id, "next")}
+              onClick={() => {
+                if(note && note.id) {
+                  categorizeNote(note.id, "next")
+                }
+              }}
             >
               Next Action
             </Button>
@@ -144,22 +175,31 @@ function NotesOrganize({
             <Button
               color="primary"
               variant="contained"
-              onClick={() => categorizeNote(note.id, "waiting")}
-            >
+              onClick={() => {
+                if(note && note.id) {
+                  categorizeNote(note.id, "waiting")
+                }
+              }}            >
               Waiting
             </Button>
             <Button
               color="primary"
               variant="contained"
-              onClick={() => categorizeNote(note.id, "reference")}
-            >
+              onClick={() => {
+                if(note && note.id) {
+                  categorizeNote(note.id, "reference")
+                }
+              }}            >
               Reference
             </Button>
             <Button
               color="primary"
               variant="contained"
-              onClick={() => deleteNote(note.id)}
-            >
+              onClick={() => {
+                if(note && note.id) {
+                  deleteNote(note.id)
+                }
+              }}            >
               Trash
             </Button>
           </div>
@@ -288,16 +328,12 @@ function NotesOrganize({
         </div>
       );
     }
-  } else if (user === null) {
-    return <Loader />;
   } else if (!user) {
     return <>{history.push("/login")}</>;
   }
+  else {
+    return <Loader />;
+  }
 }
 
-export default connect(null, {
-  fetchNotesByCategory,
-  deleteNote,
-  categorizeNote,
-  fetchProjects,
-})(NotesOrganize);
+export default connector(NotesOrganize);
