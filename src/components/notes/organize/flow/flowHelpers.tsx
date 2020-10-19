@@ -1,7 +1,6 @@
 import React from "react";
 import Note from "../../Note";
 import { Note as NoteType } from "../../../../models"
-import { History } from "history"
 import _ from "lodash";
 
 type Notes = NoteType[];

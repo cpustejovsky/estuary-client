@@ -52,6 +52,7 @@ function Project(props: Props) {
           project={project}
           id={id}
           toggleEdit={toggleEdit}
+          toggle={false}
         />
       );
     } else {
