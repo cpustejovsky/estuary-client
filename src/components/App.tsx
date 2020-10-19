@@ -48,7 +48,7 @@ const roboto = {
 }
 
 const theme = createMuiTheme({
-  
+
   typography: {
     fontFamily: 'Roboto'
   },
@@ -147,7 +147,8 @@ const App = (props: PropsFromRedux): JSX.Element => {
             <Route
               path="/projects/new"
               exact
-              render={() => <ProjectNew show={true} />}
+              render={() => <ProjectNew show={true}
+                toggle={false} />}
             />
             <Route path="/projects/show/:id" exact component={ProjectShow} />
           </Switch>

@@ -3,7 +3,7 @@ import { Button } from "@material-ui/core";
 
 type Props = {
   show: boolean,
-  toggle: any
+  toggle: any,
 }
 
 export default function TwoMinutes(props: Props) {

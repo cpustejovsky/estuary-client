@@ -260,7 +260,6 @@ const NotesOrganize = (props: Props) => {
           />
           <TwoMinutes
             show={twoMinutesShow}
-            categorizeNote={categorizeNote}
             noteId={noteId}
             toggle={toggle}
           />
