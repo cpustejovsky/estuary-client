@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
-const Timer = ({ show, toggle, categorizeNote, noteId }) => {
+
+import { Toggle } from "./flow/NotesOrganize"
+type Props = {
+  show: boolean,
+  toggle: Toggle,
+  categorizeNote: (
+    noteId: string,
+    category: string
+  ) => void,
+  noteId: string, 
+}
+
+const Timer = (props: Props) => {
+  const { show, toggle, categorizeNote, noteId } = props;
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
 
@@ -9,7 +22,7 @@ const Timer = ({ show, toggle, categorizeNote, noteId }) => {
   }
 
   useEffect(() => {
-    let interval = null;
+    let interval: any = null;
     if (isActive && seconds < 120) {
       interval = setInterval(() => {
         setSeconds((seconds) => seconds + 1);
