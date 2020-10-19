@@ -1,13 +1,26 @@
 import React from "react";
 import { Button } from "@material-ui/core";
+import { Toggle } from "./flow/NotesOrganize"
 
-export default function NotActionable({
-  show,
-  noteId,
-  categorizeNote,
-  deleteNote,
-  toggle,
-}) {
+type Props = {
+  show: boolean,
+  toggle: Toggle,
+  noteId: string,
+  categorizeNote: (
+    noteId: string,
+    category: string
+  ) => void,
+  deleteNote: (noteId: string) => void
+}
+
+export default function NotActionable(props: Props) {
+  const {
+    show,
+    noteId,
+    categorizeNote,
+    deleteNote,
+    toggle,
+  } = props;
   if (show) {
     return (
       <>

@@ -3,6 +3,7 @@ import { Formik, Field } from "formik";
 import { Button, TextField } from "@material-ui/core";
 import DateFnsUtils from "@date-io/date-fns";
 import axios from "axios";
+import { Note } from "../../../models/"
 
 import {
   MuiPickersUtilsProvider,
@@ -10,24 +11,45 @@ import {
   KeyboardTimePicker,
 } from "@material-ui/pickers";
 //TODO: potential memory leak here because I'm unmounting and not cleaning up. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function
-function Calendar({
-  id,
-  show,
-  note,
-  deleteNote,
-  history,
-  toggle
-}) {
-  const submitValues = async (values) => {
+import { Toggle } from "./flow/NotesOrganize"
+
+type Props = {
+  show: boolean,
+  toggle: Toggle,
+  noteId: string,
+  note: Note | null,
+  categorizeNote: (
+    noteId: string,
+    category: string
+  ) => void,
+  deleteNote: (noteId: string) => void,
+}
+
+function Calendar(props: Props) {
+  const {
+    noteId,
+    show,
+    deleteNote,
+    toggle,
+    note
+  } = props
+
+  const submitValues = async (values: {
+    title: string,
+    description: string,
+    date: Date,
+    startTime: Date,
+    endTime: Date,
+  }) => {
     await axios.post("/api/calendar", values);
-    deleteNote(note.id);
+    deleteNote(noteId);
     toggle.Calendar();
     toggle.Actionable();
   };
 
-  const DatePickerField = ({ field, handleBlur, form, ...other }) => {
+  const DatePickerField = (props: any) => {
+    const { field, handleBlur, form, ...other } = props
     const currentError = form.errors[field.name];
-
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <KeyboardDatePicker
@@ -57,9 +79,9 @@ function Calendar({
       </MuiPickersUtilsProvider>
     );
   };
-  const TimePickerField = ({ field, handleBlur, form, ...other }) => {
+  const TimePickerField = (props: any) => {
+    const { field, handleBlur, form, ...other } = props
     const currentError = form.errors[field.name];
-
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <KeyboardTimePicker
@@ -93,7 +115,7 @@ function Calendar({
       <div>
         <Formik
           initialValues={{
-            title: note.content,
+            title: note.Content,
             description: "",
             date: new Date(),
             startTime: new Date(),
@@ -114,64 +136,64 @@ function Calendar({
             handleSubmit,
             isSubmitting,
           }) => (
-            <form onSubmit={handleSubmit}>
-              <div className="input-field center">
-                <h1>Add Event To Calendar</h1>
-                <p>
-                  <strong>
-                    If you encounter an error, please email me at
-                    charles@cpustejovsky.com.
+              <form onSubmit={handleSubmit}>
+                <div className="input-field center">
+                  <h1>Add Event To Calendar</h1>
+                  <p>
+                    <strong>
+                      If you encounter an error, please email me at
+                      charles@cpustejovsky.com.
                   </strong>
-                </p>
-                <div className="margin-top">
-                  <TextField
-                    label="Title"
-                    variant="outlined"
-                    name="title"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.title}
-                  />
-                </div>{" "}
-                <div className="margin-top">
-                  <TextField
-                    label="Description"
-                    variant="outlined"
-                    name="description"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.description}
-                  />
-                </div>{" "}
-                <div className="margin-top">
-                  <Field name="date" component={DatePickerField} />
-                </div>{" "}
-                <div className="margin-top">
-                  <Field
-                    name="startTime"
-                    label={"Start Time"}
-                    component={TimePickerField}
-                  />
-                </div>{" "}
-                <div className="margin-top">
-                  <Field
-                    name="endTime"
-                    label={"End Time"}
-                    component={TimePickerField}
-                  />
-                </div>{" "}
-                <div className="margin-top">
-                  <Button
-                    onClick={() => {
-                      handleSubmit();
-                    }}
-                  >
-                    Save Event
+                  </p>
+                  <div className="margin-top">
+                    <TextField
+                      label="Title"
+                      variant="outlined"
+                      name="title"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.title}
+                    />
+                  </div>{" "}
+                  <div className="margin-top">
+                    <TextField
+                      label="Description"
+                      variant="outlined"
+                      name="description"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.description}
+                    />
+                  </div>{" "}
+                  <div className="margin-top">
+                    <Field name="date" component={DatePickerField} />
+                  </div>{" "}
+                  <div className="margin-top">
+                    <Field
+                      name="startTime"
+                      label={"Start Time"}
+                      component={TimePickerField}
+                    />
+                  </div>{" "}
+                  <div className="margin-top">
+                    <Field
+                      name="endTime"
+                      label={"End Time"}
+                      component={TimePickerField}
+                    />
+                  </div>{" "}
+                  <div className="margin-top">
+                    <Button
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                    >
+                      Save Event
                   </Button>
+                  </div>
                 </div>
-              </div>
-            </form>
-          )}
+              </form>
+            )}
         </Formik>
       </div>
     );

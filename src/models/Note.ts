@@ -3,6 +3,6 @@ export interface Note {
   Category: string
   Tags: string[]
   history: History
-  ID: string | null
+  ID: string
   CompletedDate: Date
 }
