@@ -26,7 +26,7 @@ import {
 } from "@material-ui/core";
 
 
-import { AppState } from "../../../../models/"
+import { AppState, Note } from "../../../../models/"
 
 const mapState = (state: AppState) => ({
   notes: Object.values(state.notes),
@@ -81,8 +81,7 @@ const NotesOrganize = (props: Props) => {
   }, [fetchNotesByCategory, fetchProjects]);
 
   const inTrayArray = mapInTrayArray(notes, history);
-  let note =
-    inTrayArray && inTrayArray[0] !== undefined ? inTrayArray[0] : null;
+  let note: Note = inTrayArray[0];
   let noteId: string = note && note !== null ? note.ID : "";
 
   const [advanced, setAdvanced] = useState<boolean>(false);
@@ -260,7 +259,6 @@ const NotesOrganize = (props: Props) => {
           />
           <TwoMinutes
             show={twoMinutesShow}
-            noteId={noteId}
             toggle={toggle}
           />
           <Timer

@@ -21,6 +21,15 @@ export function mapInTrayArray(notes: Notes, history: any) {
           CompletedDate
         };
       }).filter((note) => note?.Category === "in-tray");
+  } else {
+    return [{
+      ID: "",
+      history,
+      Content: "",
+      Tags: [],
+      Category: "empty",
+      CompletedDate: new Date()
+    }]
   }
 }
 
