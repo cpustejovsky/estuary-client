@@ -17,7 +17,7 @@ type Props = {
   show: boolean,
   toggle: Toggle,
   noteId: string,
-  note: Note | null,
+  note: Note,
   categorizeNote: (
     noteId: string,
     category: string
