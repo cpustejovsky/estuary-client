@@ -3,15 +3,34 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { linkNoteToProject } from "../../../actions";
 import { Button, Card, CardContent } from "@material-ui/core";
-function NoteForProject({
-  show,
-  toggle,
-  categorizeNote,
-  noteId,
-  projects,
-  linkNoteToProject,
-}) {
-  const selectProjectforNote = (noteId, projectId) => {
+import { Toggle } from "./flow/NotesOrganize"
+import { Project } from "../../../models/"
+
+type Props = {
+  show: boolean,
+  toggle: Toggle,
+  categorizeNote: (
+    noteId: string,
+    category: string
+  ) => void,
+  linkNoteToProject: (
+    noteId: string,
+    projectId: string
+  ) => void,
+  noteId: string,
+  projects: Project[]
+}
+
+function NoteForProject(props: Props) {
+  const {
+    show,
+    toggle,
+    categorizeNote,
+    noteId,
+    projects,
+    linkNoteToProject,
+  } = props
+  const selectProjectforNote = (noteId: string, projectId: string) => {
     linkNoteToProject(noteId, projectId);
     toggle.NoteForProject();
     toggle.Actionable();
@@ -21,9 +40,9 @@ function NoteForProject({
       return projects.map((project) => {
         return (
           <Card
-            onClick={() => selectProjectforNote(noteId, project._id)}
+            onClick={() => selectProjectforNote(noteId, project.id)}
             raised
-            key={project._id}
+            key={project.id}
             className="margin-top padding-horizontal notes click"
           >
             <CardContent>

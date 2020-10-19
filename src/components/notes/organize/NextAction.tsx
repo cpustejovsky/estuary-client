@@ -1,9 +1,17 @@
 import React from "react";
 import { Button } from "@material-ui/core";
-export default function NextAction({
-  show,
-  toggle
-}) {
+
+import { Toggle } from "./flow/NotesOrganize"
+type Props = {
+  show: boolean,
+  toggle: Toggle
+}
+
+export default function NextAction(props: Props) {
+  const {
+    show,
+    toggle
+  } = props
   if (show) {
     return (
       <>
