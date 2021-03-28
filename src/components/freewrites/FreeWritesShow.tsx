@@ -35,7 +35,7 @@ function FreeWriteShow(props: Props) {
   }, [fetchFreeWrites]);
   const renderFreeWrites = () => {
     if (!_.isEmpty(freeWrites)) {
-      return freeWrites.map(({ content, id, title }) => {
+      return freeWrites.reverse().map(({ content, id, title }) => {
         return (
           <Card key={id} raised className="margin-top freewrites">
             <CardContent>
